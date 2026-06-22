@@ -187,12 +187,12 @@ if(!isTouch){
    the matching family (products / services / industries) and writes peer
    links straight into #psnav. No SPA routing, no view transitions. */
 var navData = {
-  products:   [['emsis','EMSIS'],['gst','GCS'],['evc','Vendor Collaboration']],
+  products:   [['emsis','EMSIS'],['gst','GCS'],['evc','Vendor Collaboration'],['stt-portal','CLSS STT Portal']],
   services:   [['sap','SAP Applications'],['ent','Enterprise Apps'],['web','Web Dev'],['mob','Mobile Apps'],['bi','Business Intelligence'],['portal','Portal Solutions']],
   industries: [['i-media','Media & Broadcast'],['i-mfg','Manufacturing'],['i-dairy','Dairy & Agro'],['i-jwl','Jewellery']]
 };
 var pageType = {
-  evc:'products', emsis:'products', radio:'products', fms:'products', gst:'products', eway:'products', dms:'products',
+  evc:'products', emsis:'products', radio:'products', fms:'products', gst:'products', eway:'products', dms:'products', 'stt-portal':'products',
   sap:'services', ent:'services', web:'services', mob:'services', bi:'services', portal:'services',
   'i-media':'industries','i-mfg':'industries','i-dairy':'industries','i-jwl':'industries'
 };

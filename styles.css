@@ -4403,8 +4403,6 @@ html.js .sap-stack.stackable .sap-panel {
     transform 0.3s var(--ez);
 }
 .mi:hover .ic {
-  background: var(--spec);
-  color: #fff;
   transform: translateY(-2px) scale(1.05);
 }
 

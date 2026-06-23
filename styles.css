@@ -518,8 +518,6 @@ body::-webkit-scrollbar-thumb:hover {
   transition: 0.2s;
 }
 .mi:hover .ic {
-  background: var(--ink);
-  color: #fff;
   transform: translateY(-1px);
 }
 .mi .t {

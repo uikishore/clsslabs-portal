@@ -37,7 +37,7 @@
         <a class="mi click" href="emsis.html"><span class="ic">📡</span><span><span class="t">EMSIS</span><span class="d">Electronic Media Solution &amp; Information System</span></span></a>
         <a class="mi click" href="gst.html"><span class="ic">📊</span><span><span class="t">GCS</span><span class="d">GST Compliance Suite</span></span></a>
         <a class="mi click" href="evc.html"><span class="ic">🧾</span><span><span class="t">Vendor Collaboration</span><span class="d">Vendor onboarding, invoicing &amp; collaboration</span></span></a>
-        <a class="mi click" href="stt-portal.html"><span class="ic">📻</span><span><span class="t">CLSS STT Portal</span><span class="d">Broadcast station automation</span></span></a>
+        <a class="mi click" href="stt-portal.html"><span class="ic">📻</span><span><span class="t">CLSS STT Portal</span><span class="d">Broadcast station automation</span></span></a><a class="mi click" href="radio.html"><span class="ic">🎙️</span><span><span class="t">Radio Automation</span><span class="d">On-air studio · hotkeys · 24/7 playout</span></span></a>
       </div>
     </div>
     <div class="ng"><a class="na" href="#">Services <span class="cx">▾</span></a>
@@ -82,7 +82,7 @@
   <a class="dw-a" href="emsis.html" onclick="closeDrawer()">EMSIS — Media ERP</a>
   <a class="dw-a" href="gst.html" onclick="closeDrawer()">GCS — GST Compliance Suite</a>
   <a class="dw-a" href="evc.html" onclick="closeDrawer()">Vendor Collaboration</a>
-  <a class="dw-a" href="stt-portal.html" onclick="closeDrawer()">CLSS STT Portal</a>
+  <a class="dw-a" href="stt-portal.html" onclick="closeDrawer()">CLSS STT Portal</a><a class="dw-a" href="radio.html" onclick="closeDrawer()">Radio Automation</a>
   <div class="dw-sec">Services</div>
   <a class="dw-a" href="sap.html" onclick="closeDrawer()">SAP Applications</a>
   <a class="dw-a" href="ent.html" onclick="closeDrawer()">Enterprise Apps</a>
@@ -107,27 +107,341 @@
 </div>
 
 <!-- ════════════════ HOME ════════════════ -->
+<!-- ════════════════ RADIO AUTOMATION ════════════════ -->
 <div id="pg-radio" class="page active">
-<div class="phero"><div class="pgr"></div><div style="position:absolute;width:460px;height:460px;background:rgba(245,158,11,.06);border-radius:50%;filter:blur(90px);top:-100px;right:-80px;pointer-events:none"></div>
+
+<style>
+/* scoped widget tints for the Radio Automation page */
+.ra-player{background:linear-gradient(180deg,#fff 0%,#fafbff 100%);border:1px solid var(--line);border-radius:20px;padding:24px;box-shadow:var(--shx);position:relative;overflow:hidden}
+.ra-player::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--spec);opacity:.9}
+.ra-pnow{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.ra-pdisc{width:54px;height:54px;border-radius:50%;background:var(--spec);display:flex;align-items:center;justify-content:center;font-size:24px;color:#fff;animation:ra-spin 8s linear infinite}
+.ra-pmeta .ra-ptt{font:600 16px var(--serif);color:var(--ink);letter-spacing:-.2px}
+.ra-pmeta .ra-pat{font:500 12px var(--mono);color:var(--ink2);text-transform:uppercase;letter-spacing:1.4px;margin-top:4px}
+.ra-pchip{margin-left:auto;display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:99px;background:var(--irisT);color:var(--iris2);font:600 10px var(--mono);text-transform:uppercase;letter-spacing:1.3px}
+.ra-pchip .ra-dot{width:7px;height:7px;border-radius:50%;background:var(--iris);box-shadow:0 0 0 0 rgba(79,70,229,.55);animation:ra-pulse 1.6s ease-out infinite}
+.ra-wave{display:flex;align-items:flex-end;gap:3px;height:74px;padding:8px 0;margin:8px 0 14px}
+.ra-wave span{flex:1;background:var(--spec);border-radius:2px;min-width:2px;opacity:.86;animation:ra-wave 1.4s ease-in-out infinite}
+.ra-prog{height:5px;background:var(--line);border-radius:99px;overflow:hidden;position:relative}
+.ra-prog::after{content:"";position:absolute;left:0;top:0;height:100%;width:60%;background:var(--spec);border-radius:99px}
+.ra-ptimes{display:flex;justify-content:space-between;margin-top:8px;font:500 11px var(--mono);color:var(--ink2);letter-spacing:.4px}
+.ra-pctl{display:flex;align-items:center;gap:14px;justify-content:center;margin-top:18px}
+.ra-pbtn{width:42px;height:42px;border-radius:50%;border:1px solid var(--line2);background:var(--paper);display:flex;align-items:center;justify-content:center;color:var(--ink);font-size:16px;cursor:pointer;transition:all .22s}
+.ra-pbtn:hover{border-color:var(--iris);color:var(--iris)}
+.ra-pbtn.ra-play{width:54px;height:54px;background:var(--ink);color:#fff;border-color:var(--ink);font-size:18px}
+.ra-pbtn.ra-play:hover{background:var(--iris);border-color:var(--iris)}
+.ra-pvol{margin-left:auto;display:flex;align-items:center;gap:8px;font:500 11px var(--mono);color:var(--ink2)}
+.ra-pvol .ra-vbar{width:56px;height:4px;background:var(--line);border-radius:99px;position:relative}
+.ra-pvol .ra-vbar::after{content:"";position:absolute;left:0;top:0;height:100%;width:70%;background:var(--iris);border-radius:99px}
+
+/* HotKey wall */
+.ra-hkwall{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.ra-hk{aspect-ratio:1;border-radius:14px;background:var(--paper);border:1px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:10px;cursor:pointer;transition:all .22s;position:relative;overflow:hidden;user-select:none}
+.ra-hk::before{content:"";position:absolute;left:0;top:0;right:0;height:2px;background:var(--spec);opacity:0;transition:opacity .22s}
+.ra-hk:hover{border-color:var(--iris);transform:translateY(-2px);box-shadow:0 6px 18px rgba(79,70,229,.10)}
+.ra-hk:hover::before{opacity:1}
+.ra-hk.ra-pressed{transform:scale(.96);background:var(--irisT);border-color:var(--iris)}
+.ra-hk.ra-pressed::before{opacity:1}
+.ra-hk-i{font-size:22px;line-height:1;margin-bottom:6px}
+.ra-hk-l{font:600 10px var(--mono);color:var(--ink);text-transform:uppercase;letter-spacing:1.1px}
+@media (max-width:700px){.ra-hkwall{grid-template-columns:repeat(3,1fr)}}
+
+/* Track list */
+.ra-tl{background:var(--paper);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--shx)}
+.ra-tl-hd{display:grid;grid-template-columns:42px 1fr 90px 90px;gap:12px;align-items:center;padding:14px 20px;background:#fafbff;border-bottom:1px solid var(--line);font:600 10px var(--mono);color:var(--ink2);text-transform:uppercase;letter-spacing:1.4px}
+.ra-tr{display:grid;grid-template-columns:42px 1fr 90px 90px;gap:12px;align-items:center;padding:14px 20px;border-bottom:1px solid var(--line);transition:background .18s}
+.ra-tr:last-child{border-bottom:0}
+.ra-tr:hover{background:#fafbff}
+.ra-tr-ic{width:34px;height:34px;border-radius:50%;background:var(--irisT);color:var(--iris2);display:flex;align-items:center;justify-content:center;font-size:13px}
+.ra-tr-tt{font:600 14px var(--serif);color:var(--ink);letter-spacing:-.1px}
+.ra-tr-at{font:500 11px var(--mono);color:var(--ink2);text-transform:uppercase;letter-spacing:1.2px;margin-top:2px}
+.ra-tr-du{font:600 13px var(--mono);color:var(--ink);text-align:right}
+.ra-tr-tg{justify-self:end}
+@media (max-width:700px){.ra-tl-hd,.ra-tr{grid-template-columns:42px 1fr;}.ra-tl-hd > :nth-child(3),.ra-tl-hd > :nth-child(4),.ra-tr-du,.ra-tr-tg{display:none}}
+
+/* Signal source meter */
+.ra-meter{display:flex;align-items:flex-end;gap:3px;height:32px;margin-top:14px}
+.ra-meter span{flex:1;background:var(--spec);border-radius:2px;min-width:2px;opacity:.86;animation:ra-blip 1.1s ease-in-out infinite}
+.ra-meter.ra-idle span{animation:none;opacity:.22;background:var(--line2)}
+
+/* Waveform editor panel */
+.ra-edit{background:#0f1024;border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:18px;position:relative;overflow:hidden}
+.ra-edit-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;font:500 11px var(--mono);color:rgba(255,255,255,.62);text-transform:uppercase;letter-spacing:1.4px}
+.ra-edit-hd b{color:#fff;font-weight:600}
+.ra-edit-wave{height:120px;position:relative;display:flex;align-items:flex-end;gap:2px;padding:0 4px}
+.ra-edit-wave > span:not(.ra-mk){flex:1;background:var(--spec);border-radius:2px;min-width:2px;opacity:.78}
+.ra-mk{position:absolute;top:0;bottom:0;width:2px;z-index:2}
+.ra-mk-cue{background:#10b981;left:22%}
+.ra-mk-cue::after{content:"CUE";position:absolute;top:0;left:6px;background:#10b981;color:#fff;font:600 9px var(--mono);padding:2px 6px;border-radius:3px;letter-spacing:.8px}
+.ra-mk-out{background:#ff7a8a;left:78%}
+.ra-mk-out::after{content:"OUT";position:absolute;top:0;left:-34px;background:#ff7a8a;color:#fff;font:600 9px var(--mono);padding:2px 6px;border-radius:3px;letter-spacing:.8px}
+.ra-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+
+/* Workflow numbered tile */
+.ra-step{position:relative}
+.ra-step .ra-num{position:absolute;top:14px;right:18px;font:700 42px var(--mono);color:var(--line2);line-height:1;letter-spacing:-1px}
+
+/* Keyframes */
+@keyframes ra-pulse{0%{box-shadow:0 0 0 0 rgba(79,70,229,.55)}70%{box-shadow:0 0 0 10px rgba(79,70,229,0)}100%{box-shadow:0 0 0 0 rgba(79,70,229,0)}}
+@keyframes ra-wave{0%,100%{transform:scaleY(.35)}50%{transform:scaleY(1)}}
+@keyframes ra-blip{0%,100%{transform:scaleY(.4)}50%{transform:scaleY(1)}}
+@keyframes ra-spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+</style>
+
+<!-- HERO -->
+<div class="phero"><div class="pgr"></div>
 <div class="W"><div class="phinn">
-  <div><div style="margin-bottom:12px"><span class="bdg bgr">8+ Networks · 24×7 On-Air</span></div><div class="eyebrow">Broadcast Technology</div>
-  <h1 style="font-size:clamp(34px,5vw,60px);font-weight:800;letter-spacing:-2px;line-height:1.06;margin-bottom:20px">Radio Automation<br><span class="hl">CRA + RJWAVE Suite</span></h1>
-  <p class="sub" style="margin-bottom:28px">The industry's most modern and powerful radio automation — making sure radio stations are on the air and sounding great every minute of every day, with complete sales, traffic, billing, and automation.</p>
-  <div style="display:flex;gap:12px;flex-wrap:wrap"><a class="bp" href="contact.html">Request a Demo <span class="arr">→</span></a><a class="bgo" href="index.html">All Products</a></div>
-  <div class="mrow"><div class="mc"><div class="mcn">8+</div><div class="mcl">FM Networks Live</div></div><div class="mc"><div class="mcn">24×7</div><div class="mcl">Broadcast Uptime</div></div><div class="mc"><div class="mcn">100%</div><div class="mcl">Automation</div></div></div></div>
-  <div><img class="prx" data-prx="0.10" src="https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=800&q=85&fit=crop&auto=format" style="width:100%;border-radius:20px;box-shadow:var(--shx);object-fit:cover;height:360px" alt="Radio" loading="lazy"></div>
-</div></div></div>
-<section class="S"><div class="W"><div class="tcol">
-  <div class="rv"><div class="eyebrow">CRA Platform</div><h2 class="h1">Complete Radio <span class="hl">Automation</span></h2><p class="sub" style="margin-bottom:22px">The most complete solution for radio broadcasters — sales, traffic, billing and automation in one seamless platform.</p>
-  <div style="display:flex;flex-direction:column;gap:11px"><div class="irow"><div class="irico">👁️</div><div><div class="irtl">One-Touch Preview</div><div class="irds">View upcoming songs, promos, and jingles at a glance</div></div></div><div class="irow"><div class="irico">🎚️</div><div><div class="irtl">Customisable Jingle Panel</div><div class="irds">Dynamic buttons configurable to the choice of the RJ — fully flexible</div></div></div><div class="irow"><div class="irico">📚</div><div><div class="irtl">Dynamic Library Search</div><div class="irds">Select songs on the fly for live programs from any device</div></div></div><div class="irow"><div class="irico">📰</div><div><div class="irtl">Live RSS Feed Access</div><div class="irds">Real-time access to live RSS feeds for enriched RJ content</div></div></div></div></div>
-  <div class="dp rv d1"><div class="eyebrow" style="color:rgba(255,255,255,.38);margin-bottom:14px">RJWAVE</div><h3>Advanced Music Programming</h3><p class="dsub" style="margin-top:10px">Create great music programming through advanced scheduling. Auto-generate playlists that never repeat the same way twice — giving listeners a fresh experience every time.</p>
-  <div class="hlist" style="margin-top:18px"><div class="hitem"><div class="hichk">✓</div><div class="hitxt">Clock management with automatic and manual scheduling</div></div><div class="hitem"><div class="hichk">✓</div><div class="hitxt">User-defined fields, attribute codes, and scheduling rules</div></div><div class="hitem"><div class="hichk">✓</div><div class="hitxt">Flow and balance control for perfect music variety</div></div><div class="hitem"><div class="hichk">✓</div><div class="hitxt">Integration with playout system for seamless broadcast</div></div></div></div>
-</div>
-<div class="ctab rv"><div class="cbl"><h3>Power Your Radio Station with CRA</h3><p>India's leading FM networks trust CLSS Radio Automation.</p></div><a class="bw" href="contact.html">Get a Live Demo <span class="arr">→</span></a></div>
-</div></section>
+  <div>
+    <div style="margin-bottom:12px"><span class="bdg bgr">On-Air · Live</span></div>
+    <div class="eyebrow">On-Air Radio Automation</div>
+    <h1 style="font-size:clamp(34px,5vw,60px);font-weight:800;letter-spacing:-2px;line-height:1.06;margin:0 0 20px">Keep your station <span class="hl">on air, around the clock.</span></h1>
+    <p class="sub" style="margin-bottom:28px">A modern broadcast suite for radio teams — on-air player, hotkey wall, library, live signal patching and gapless 24/7 automation, designed to keep music, voices and ad spots flowing without a beat.</p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap">
+      <a class="bp" href="contact.html">Launch Studio <span class="arr">→</span></a>
+      <a class="bgo" href="#modules">See Modules</a>
+    </div>
+  </div>
+  <div>
+    <div class="ra-player rv">
+      <div class="ra-pnow">
+        <div class="ra-pdisc">💿</div>
+        <div class="ra-pmeta">
+          <div class="ra-ptt">Golden Hour</div>
+          <div class="ra-pat">House Library · Music</div>
+        </div>
+        <span class="ra-pchip"><span class="ra-dot"></span>98.4 FM · Studio A</span>
+      </div>
+      <div class="ra-wave" id="playerWave" aria-hidden="true"></div>
+      <div class="ra-prog"></div>
+      <div class="ra-ptimes"><span>2:31</span><span>4:11</span></div>
+      <div class="ra-pctl">
+        <button class="ra-pbtn" aria-label="Skip back">⏮</button>
+        <button class="ra-pbtn ra-play" id="raPlay" aria-label="Play / Pause"><span id="raPlayG">⏸</span></button>
+        <button class="ra-pbtn" aria-label="Skip forward">⏭</button>
+        <div class="ra-pvol"><span>🔊</span><span class="ra-vbar"></span></div>
+      </div>
+    </div>
+  </div>
 </div>
 
-<!-- ═══════════ SIGNAL FOOTER (indigo-ink) ═══════════ -->
+<!-- Stats strip -->
+<div class="mrow" style="margin-top:38px">
+  <div class="mc"><div class="mcn">24/7</div><div class="mcl">Unattended Air</div></div>
+  <div class="mc"><div class="mcn">0 ms</div><div class="mcl">Gapless Segue</div></div>
+  <div class="mc"><div class="mcn">Live</div><div class="mcl">Signal Patching</div></div>
+  <div class="mc"><div class="mcn">1-Click</div><div class="mcl">HotKey Fire</div></div>
+</div>
+
+</div></div>
+
+<!-- ═══════ MODULES ═══════ -->
+<section class="S" id="modules"><div class="W">
+  <div class="eyebrow rv">The Suite</div>
+  <h2 class="h1 rv d1" style="margin:6px 0 28px">Everything the studio needs <span class="hl">to stay live</span></h2>
+  <div class="fgrid" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px">
+    <div class="fcard rv"><div class="fiico">🎚️</div><div class="fitl">On-Air Player</div><div class="fdsc">Dual-deck player with gapless segue, automated crossfade and cue-point precision so every transition lands cleanly.</div></div>
+    <div class="fcard rv d1"><div class="fiico">🎵</div><div class="fitl">HotKeys Wall</div><div class="fdsc">Colour-coded pads for station IDs, sweepers, jingles and stings — one tap to fire with auto-ducking under speech.</div></div>
+    <div class="fcard rv d2"><div class="fiico">📚</div><div class="fitl">Audio Library</div><div class="fdsc">Indexed catalogue of music, beds, spots and imaging — drag onto the playlist or fire straight from any device.</div></div>
+    <div class="fcard rv"><div class="fiico">🛰️</div><div class="fitl">Live Signal Connection</div><div class="fdsc">Patch satellite downlinks, STL microwave links and IP/AoIP streams. Monitor every feed with live VU meters.</div></div>
+    <div class="fcard rv d1"><div class="fiico">〰️</div><div class="fitl">Waveform Editor</div><div class="fdsc">Zoomable waveform with cue, intro, outro, fade and gain markers — trim and shape every second before it airs.</div></div>
+    <div class="fcard rv d2"><div class="fiico">🔁</div><div class="fitl">24/7 Automation</div><div class="fdsc">Day-part clocks, rotation rules and walk-in/walk-out logic keep the station running unattended through the night.</div></div>
+  </div>
+</div></section>
+
+<!-- ═══════ HOTKEYS WALL ═══════ -->
+<section class="S Salf"><div class="W">
+  <div class="tcol">
+    <div class="rv">
+      <div class="eyebrow">HotKeys Wall</div>
+      <h2 class="h1" style="margin:6px 0 16px">Fire hotkeys & sweepers <span class="hl">in one tap</span></h2>
+      <p class="sub" style="margin-bottom:22px">A colour-coded wall of pads built for live RJs — every spot, sting and station ID a thumb-press away, with auto-ducking under voice and tight latency on every trigger.</p>
+      <div class="hlist">
+        <div class="hitem"><div class="hichk">✓</div><div class="hitxt">Assignable hot-keys per pad — any audio file, instant recall</div></div>
+        <div class="hitem"><div class="hichk">✓</div><div class="hitxt">Instant-fire with auto-ducking under live presenter audio</div></div>
+        <div class="hitem"><div class="hichk">✓</div><div class="hitxt">Loop, one-shot and bed playback modes per pad</div></div>
+      </div>
+    </div>
+    <div class="ra-hkwall rv d1">
+      <div class="ra-hk" data-press><div class="ra-hk-i">📻</div><div class="ra-hk-l">Station ID</div></div>
+      <div class="ra-hk" data-press><div class="ra-hk-i">📰</div><div class="ra-hk-l">News Sting</div></div>
+      <div class="ra-hk" data-press><div class="ra-hk-i">🎵</div><div class="ra-hk-l">Sweeper</div></div>
+      <div class="ra-hk" data-press><div class="ra-hk-i">⏰</div><div class="ra-hk-l">Time Check</div></div>
+      <div class="ra-hk" data-press><div class="ra-hk-i">🔔</div><div class="ra-hk-l">Top of Hour</div></div>
+      <div class="ra-hk" data-press><div class="ra-hk-i">🚦</div><div class="ra-hk-l">Traffic</div></div>
+      <div class="ra-hk" data-press><div class="ra-hk-i">☀️</div><div class="ra-hk-l">Weather</div></div>
+      <div class="ra-hk" data-press><div class="ra-hk-i">📣</div><div class="ra-hk-l">Promo</div></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- ═══════ AUDIO LIBRARY ═══════ -->
+<section class="S"><div class="W">
+  <div class="tcol" style="grid-template-columns:1fr 1.1fr">
+    <div class="rv">
+      <div class="eyebrow">Audio Library</div>
+      <h2 class="h1" style="margin:6px 0 16px">Every track, cue and spot <span class="hl">in one place</span></h2>
+      <p class="sub">Indexed by title, artist, tempo, energy and category — drag any item onto the live playlist or fire it from the search bar without leaving the on-air screen.</p>
+    </div>
+    <div class="ra-tl rv d1">
+      <div class="ra-tl-hd"><span></span><span>Track</span><span style="text-align:right">Tag</span><span style="text-align:right">Duration</span></div>
+      <div class="ra-tr"><div class="ra-tr-ic">▶</div><div><div class="ra-tr-tt">Morning Drive Theme</div><div class="ra-tr-at">Station Imaging</div></div><div class="ra-tr-tg"><span class="bdg bbl">Sweeper</span></div><div class="ra-tr-du">0:28</div></div>
+      <div class="ra-tr"><div class="ra-tr-ic">▶</div><div><div class="ra-tr-tt">Sunrise Anthem</div><div class="ra-tr-at">House Library</div></div><div class="ra-tr-tg"><span class="bdg bbl">Music</span></div><div class="ra-tr-du">3:42</div></div>
+      <div class="ra-tr"><div class="ra-tr-ic">▶</div><div><div class="ra-tr-tt">Breaking News Bed</div><div class="ra-tr-at">Production</div></div><div class="ra-tr-tg"><span class="bdg bbl">Bed</span></div><div class="ra-tr-du">1:05</div></div>
+      <div class="ra-tr"><div class="ra-tr-ic">▶</div><div><div class="ra-tr-tt">Golden Hour</div><div class="ra-tr-at">Library Mix</div></div><div class="ra-tr-tg"><span class="bdg bbl">Music</span></div><div class="ra-tr-du">4:11</div></div>
+      <div class="ra-tr"><div class="ra-tr-ic">▶</div><div><div class="ra-tr-tt">Hourly Promo Spot</div><div class="ra-tr-at">Sales</div></div><div class="ra-tr-tg"><span class="bdg bbl">Spot</span></div><div class="ra-tr-du">0:30</div></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- ═══════ LIVE SIGNAL CONNECTION ═══════ -->
+<section class="S Salf"><div class="W">
+  <div class="eyebrow rv">Live Signal Connection</div>
+  <h2 class="h1 rv d1" style="margin:6px 0 12px">Patch any live source, <span class="hl">monitor every feed</span></h2>
+  <p class="sub rv d1" style="max-width:720px;margin-bottom:28px">Bring in satellite downlinks, STL microwave returns and IP/AoIP streams from anywhere on the network — every input metered, every status visible.</p>
+  <div class="fgrid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px">
+    <div class="fcard rv">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px"><div class="fiico" style="margin:0">🛰️</div><span class="bdg bgr">Live</span></div>
+      <div class="fitl">Satellite Feed</div><div class="fdsc">Network downlink</div>
+      <div class="ra-meter" aria-hidden="true"></div>
+    </div>
+    <div class="fcard rv d1">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px"><div class="fiico" style="margin:0">📶</div><span class="bdg bgr">Live</span></div>
+      <div class="fitl">Studio Link</div><div class="fdsc">STL microwave</div>
+      <div class="ra-meter" aria-hidden="true"></div>
+    </div>
+    <div class="fcard rv d2">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px"><div class="fiico" style="margin:0">🔌</div><span class="bdg bbl">Standby</span></div>
+      <div class="fitl">Network Stream</div><div class="fdsc">IP / AoIP source</div>
+      <div class="ra-meter ra-idle" aria-hidden="true"></div>
+    </div>
+    <div class="fcard rv">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px"><div class="fiico" style="margin:0">🎙️</div><span class="bdg bbl">Ready</span></div>
+      <div class="fitl">Studio Mic</div><div class="fdsc">Live announcer</div>
+      <div class="ra-meter ra-idle" aria-hidden="true"></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- ═══════ WAVEFORM EDITOR ═══════ -->
+<section class="S"><div class="W">
+  <div class="dp rv">
+    <div class="tcol">
+      <div>
+        <div class="eyebrow" style="color:rgba(255,255,255,.45)">Waveform Editor</div>
+        <h3 style="margin:6px 0 14px;font:700 32px/1.1 var(--serif);letter-spacing:-.6px">Trim, cue and shape <span class="hl">every second</span></h3>
+        <p class="dsub" style="margin-bottom:18px">A zoomable waveform on every clip — set cue and outro markers, ramp fades, balance gain and lock the segue point before it ever hits air.</p>
+        <div class="ra-tags">
+          <span class="bdg bbl">Cue</span>
+          <span class="bdg bbl">Intro</span>
+          <span class="bdg bbl">Outro</span>
+          <span class="bdg bbl">Fade</span>
+          <span class="bdg bbl">Gain</span>
+        </div>
+      </div>
+      <div>
+        <div class="ra-edit">
+          <div class="ra-edit-hd"><b>morning_drive_theme.wav</b><span>00:28</span></div>
+          <div class="ra-edit-wave" id="editorWave" aria-hidden="true">
+            <span class="ra-mk ra-mk-cue"></span>
+            <span class="ra-mk ra-mk-out"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- ═══════ WORKFLOW ═══════ -->
+<section class="S Salf"><div class="W">
+  <div class="eyebrow rv">How it runs</div>
+  <h2 class="h1 rv d1" style="margin:6px 0 28px">From library to on-air <span class="hl">in four steps</span></h2>
+  <div class="fgrid" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px">
+    <div class="fcard ra-step rv"><span class="ra-num">01</span><div class="fiico">📚</div><div class="fitl">Build the Library</div><div class="fdsc">Ingest music, beds and spots; auto-detect cues and tag every clip for retrieval.</div></div>
+    <div class="fcard ra-step rv d1"><span class="ra-num">02</span><div class="fiico">📡</div><div class="fitl">Program the Clock</div><div class="fdsc">Lay out rotations, dayparts and walk-in/walk-out rules — preview the next hour at a glance.</div></div>
+    <div class="fcard ra-step rv d2"><span class="ra-num">03</span><div class="fiico">🛰️</div><div class="fitl">Patch Live Sources</div><div class="fdsc">Bring in satellite, STL and IP streams; monitor every feed with live meters.</div></div>
+    <div class="fcard ra-step rv"><span class="ra-num">04</span><div class="fiico">🎚️</div><div class="fitl">Go On Air</div><div class="fdsc">Hand off to 24/7 automation — gapless segue, hotkey fire, unattended through the night.</div></div>
+  </div>
+</div></section>
+
+<!-- ═══════ CLOSING CTA ═══════ -->
+<section class="S"><div class="W">
+  <div class="ctab rv">
+    <div class="cbl">
+      <div style="font-size:36px;margin-bottom:8px">📻</div>
+      <h3>Put your station on autopilot</h3>
+      <p>Sign in to the CLSS Radio Automation studio and keep the music, hotkeys and live sources flowing — 24 hours a day.</p>
+    </div>
+    <a class="bw" href="contact.html">Launch Studio <span class="arr">→</span></a>
+  </div>
+</div></section>
+
+<script>
+(function(){
+  // waveform bar factory
+  function fill(el, n, varH){
+    if(!el) return;
+    var f = document.createDocumentFragment();
+    for(var i=0;i<n;i++){
+      var b = document.createElement('span');
+      var h = Math.round((Math.sin(i*0.45)*0.5 + 0.55) * 100);
+      h = Math.max(12, Math.min(100, h + (Math.random()*30 - 15)));
+      b.style.height = h + '%';
+      b.style.animationDelay = (i * 0.03) + 's';
+      f.appendChild(b);
+    }
+    el.appendChild(f);
+  }
+  fill(document.getElementById('playerWave'), 64);
+  // editor wave needs to keep its CUE/OUT marker children
+  (function(){
+    var ed = document.getElementById('editorWave'); if(!ed) return;
+    var f = document.createDocumentFragment();
+    for(var i=0;i<96;i++){
+      var b = document.createElement('span');
+      var h = Math.round((Math.sin(i*0.32)*0.5 + 0.55) * 100);
+      h = Math.max(8, Math.min(100, h + (Math.random()*36 - 18)));
+      b.style.height = h + '%';
+      f.appendChild(b);
+    }
+    ed.insertBefore(f, ed.firstChild);
+  })();
+  // signal source meters
+  document.querySelectorAll('.ra-meter').forEach(function(m){
+    var f = document.createDocumentFragment();
+    for(var i=0;i<10;i++){
+      var b = document.createElement('span');
+      var h = 30 + Math.round(Math.random()*70);
+      b.style.height = h + '%';
+      b.style.animationDelay = (i * 0.07) + 's';
+      f.appendChild(b);
+    }
+    m.appendChild(f);
+  });
+  // play/pause toggle
+  var pb = document.getElementById('raPlay'), pg = document.getElementById('raPlayG'), wv = document.getElementById('playerWave');
+  if(pb && pg){
+    var playing = true;
+    pb.addEventListener('click', function(){
+      playing = !playing;
+      pg.textContent = playing ? '⏸' : '▶';
+      if(wv) wv.style.animationPlayState = playing ? 'running' : 'paused';
+      wv && wv.querySelectorAll('span').forEach(function(s){ s.style.animationPlayState = playing ? 'running' : 'paused'; });
+    });
+  }
+  // hotkey press state
+  document.querySelectorAll('.ra-hk[data-press]').forEach(function(p){
+    p.addEventListener('mousedown', function(){ p.classList.add('ra-pressed'); });
+    var clear = function(){ p.classList.remove('ra-pressed'); };
+    p.addEventListener('mouseup', clear);
+    p.addEventListener('mouseleave', clear);
+    p.addEventListener('touchstart', function(){ p.classList.add('ra-pressed'); }, {passive:true});
+    p.addEventListener('touchend', clear);
+  });
+})();
+</script>
+
+</div>
+
 <footer id="footer">
   <div class="grid-bg"></div>
   <div class="W">
@@ -142,7 +456,7 @@
           <a class="fsb" href="#" aria-label="YouTube">▶</a>
         </div>
       </div>
-      <div><div class="fct">Products</div><ul class="fll"><li><a href="emsis.html">EMSIS — Media ERP</a></li><li><a href="gst.html">GCS — GST Suite</a></li><li><a href="evc.html">Vendor Collaboration</a></li><li><a href="stt-portal.html">CLSS STT Portal</a></li></ul></div>
+      <div><div class="fct">Products</div><ul class="fll"><li><a href="emsis.html">EMSIS — Media ERP</a></li><li><a href="gst.html">GCS — GST Suite</a></li><li><a href="evc.html">Vendor Collaboration</a></li><li><a href="stt-portal.html">CLSS STT Portal</a></li><li><a href="radio.html">Radio Automation</a></li></ul></div>
       <div><div class="fct">Services</div><ul class="fll"><li><a href="sap.html">SAP Applications</a></li><li><a href="ent.html">Enterprise Apps</a></li><li><a href="web.html">Web Development</a></li><li><a href="mob.html">Mobile Apps</a></li><li><a href="bi.html">Business Intelligence</a></li><li><a href="portal.html">Portal Solutions</a></li></ul></div>
       <div><div class="fct">Industries</div><ul class="fll"><li><a href="i-media.html">Media &amp; Broadcast</a></li><li><a href="i-mfg.html">Manufacturing</a></li><li><a href="i-dairy.html">Dairy &amp; Agro</a></li><li><a href="i-jwl.html">Jewellery</a></li><li><a href="#">Energy &amp; Utilities</a></li></ul></div>
       <div><div class="fct">Company</div><ul class="fll"><li><a href="index.html">About CLSS</a></li><li><a href="evc.html">Partner Portal</a></li><li><a href="#">Portfolio</a></li><li><a href="#">Careers</a></li><li><a href="#" onclick="location.href='index.html';setTimeout(function(){document.getElementById('contact').scrollIntoView({behavior:'smooth'})},700)">Contact</a></li></ul></div>

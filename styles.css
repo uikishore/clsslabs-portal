@@ -95,53 +95,6 @@ body::-webkit-scrollbar-thumb:hover {
   background: var(--dim);
 }
 
-/* ───────── CURSOR (redesigned · ink dot + signal ring) ───────── */
-#cur,
-#ring {
-  position: fixed;
-  top: 0;
-  left: 0;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
-}
-#cur {
-  width: 6px;
-  height: 6px;
-  background: var(--iris);
-  transition:
-    width 0.25s,
-    height 0.25s,
-    background 0.25s;
-}
-#ring {
-  width: 34px;
-  height: 34px;
-  border: 1.5px solid rgba(79, 70, 229, 0.34);
-  z-index: 9998;
-  transition:
-    width 0.3s var(--ez),
-    height 0.3s var(--ez),
-    border-color 0.3s,
-    background 0.3s;
-}
-body:has(a:hover, button:hover, .click:hover) #cur {
-  width: 0;
-  height: 0;
-}
-body:has(a:hover, button:hover, .click:hover) #ring {
-  width: 54px;
-  height: 54px;
-  border-color: var(--iris);
-  background: rgba(79, 70, 229, 0.07);
-}
-@media (hover: none), (pointer: coarse) {
-  #cur,
-  #ring {
-    display: none;
-  }
-}
 
 /* ───────── SCROLL PROGRESS (spectral) ───────── */
 #prog {
@@ -664,12 +617,6 @@ body:has(a:hover, button:hover, .click:hover) #ring {
 .burger.x span:nth-child(3) {
   transform: translateY(-6px) rotate(-45deg);
 }
-#ring.big {
-  width: 54px;
-  height: 54px;
-  border-color: var(--iris);
-  background: rgba(79, 70, 229, 0.07);
-}
 .fsub.err {
   background: var(--coral) !important;
 }
@@ -921,10 +868,6 @@ html.js .rv.on {
     transform: none !important;
     clip-path: none !important;
     transition: none !important;
-  }
-  #cur,
-  #ring {
-    display: none;
   }
   .prx {
     transform: none !important;

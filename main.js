@@ -5,17 +5,6 @@ var reduceMotion=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
 var isTouch=window.matchMedia('(hover:none),(pointer:coarse)').matches;
 var smoothEnabled=!reduceMotion&&!isTouch;
 
-/* ── custom cursor (pointer devices only) ── */
-(function(){
-  var C=document.getElementById('cur'),R=document.getElementById('ring');
-  if(!C||!R||isTouch){if(C)C.style.display='none';if(R)R.style.display='none';return;}
-  var mx=innerWidth/2,my=innerHeight/2,rx=mx,ry=my;
-  addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;C.style.left=mx+'px';C.style.top=my+'px';});
-  (function loop(){rx+=(mx-rx)*.16;ry+=(my-ry)*.16;R.style.left=rx+'px';R.style.top=ry+'px';requestAnimationFrame(loop);})();
-  var hot='a,button,.click,.ptile,.svc-row,.indp,input,textarea,select,.tdot,.psp';
-  document.addEventListener('mouseover',function(e){if(e.target.closest(hot))R.classList.add('big');});
-  document.addEventListener('mouseout',function(e){if(e.target.closest(hot))R.classList.remove('big');});
-})();
 
 /* ── hero spectral waveform (canvas) ── */
 (function(){

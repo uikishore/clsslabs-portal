@@ -2179,7 +2179,7 @@ html.js .htit.on .ln > span {
 .fsel:focus {
   outline: none;
   border-color: var(--iris);
-  background: var(--paper);
+  background-color: var(--paper);
   box-shadow: 0 0 0 4px var(--irisT);
 }
 .fsel:focus {

@@ -2363,7 +2363,8 @@ html.js .htit.on .ln > span {
   padding: 64px 0 48px;
   overflow: hidden;
 }
-.phero .pgr {
+.phero .pgr,
+.ab-hero-wrap .pgr {
   position: absolute;
   inset: 0;
   z-index: 0;
@@ -2374,6 +2375,13 @@ html.js .htit.on .ln > span {
   mask-image: linear-gradient(180deg, #000, transparent 90%);
   -webkit-mask-image: linear-gradient(180deg, #000, transparent 90%);
   opacity: 0.6;
+}
+.ab-hero-wrap {
+  position: relative;
+}
+.ab-hero-wrap > .W {
+  position: relative;
+  z-index: 1;
 }
 .phero > div[style*="blur(90px)"] {
   display: none !important;

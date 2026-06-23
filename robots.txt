@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://uikishore.github.io/clsslabs-portal/sitemap.xml

@@ -314,4 +314,45 @@ window.doSubEVC=function(){
 /* ── anchor smooth-scroll ── */
 document.querySelectorAll('a[href^="#"]:not([onclick])').forEach(function(a){a.addEventListener('click',function(e){var sel=a.getAttribute('href');if(sel==='#'||sel.length<2)return;var t=document.querySelector(sel);if(t){e.preventDefault();var y=t.getBoundingClientRect().top+scrollY-86;if(smoothEnabled){ssTo(y);}else{scrollTo({top:y,behavior:'smooth'});}}});});
 
+/* ── tools & vendors — pinned horizontal scroll (mirrors the Industries rail) ── */
+(function(){
+  var stage=document.getElementById('toolStage'),rail=document.getElementById('toolRail'),bar=document.getElementById('toolBar');
+  if(!stage||!rail)return;
+  var cards=[].slice.call(rail.querySelectorAll('.itool'));if(!cards.length)return;
+  var maxX=0,dist=0,activeIdx=-1;
+  function navH(){return parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--navH'))||70;}
+  function isMobile(){return window.innerWidth<=820;}
+  /* collapsed (height:0) media defeats native lazy-loading — pull active card + neighbours in by hand */
+  function load(i){if(i<0||i>=cards.length)return;var im=cards[i].querySelector('img');if(im&&!im.dataset.ld){im.dataset.ld='1';im.loading='eager';if(!im.complete)im.src=im.getAttribute('src');}}
+  function setActive(i){if(i===activeIdx)return;activeIdx=i;for(var k=0;k<cards.length;k++)cards[k].classList.toggle('is-active',k===i);load(i);load(i-1);load(i+1);}
+  function measure(){
+    if(isMobile()){stage.classList.add('no-pin');stage.style.height='';rail.style.transform='';cards.forEach(function(c,i){c.style.opacity='';load(i);});return;}
+    stage.classList.remove('no-pin');
+    var pinH=window.innerHeight-navH();
+    var vw=rail.parentElement.clientWidth;
+    maxX=Math.max(0,rail.scrollWidth-vw);
+    dist=maxX;                                   /* 1px page-scroll = 1px horizontal travel */
+    stage.style.height=(pinH+dist)+'px';
+  }
+  function frame(){
+    if(isMobile()||!stage.offsetParent)return;
+    var rect=stage.getBoundingClientRect();
+    var p=dist>0?Math.min(1,Math.max(0,(navH()-rect.top)/dist)):0;
+    rail.style.transform='translate3d('+(-p*maxX).toFixed(2)+'px,0,0)';
+    var cx=window.innerWidth/2,best=0,bd=1e9;
+    for(var i=0;i<cards.length;i++){
+      var r=cards[i].getBoundingClientRect(),ctr=r.left+r.width/2,dz=Math.abs(ctr-cx)/window.innerWidth;
+      cards[i].style.opacity=(1-Math.min(dz,0.62)*0.6).toFixed(3);   /* dim away from centre */
+      var d=Math.abs(ctr-cx);if(d<bd){bd=d;best=i;}
+    }
+    setActive(best);                              /* centre card expands (image + points) */
+    if(bar)bar.style.width=(p*100).toFixed(1)+'%';
+  }
+  var ticking=false;function onScroll(){if(!ticking){ticking=true;requestAnimationFrame(function(){frame();ticking=false;});}}
+  window.addEventListener('scroll',onScroll,{passive:true});
+  window.addEventListener('resize',function(){measure();frame();});
+  setTimeout(function(){measure();frame();},250);
+  window.addEventListener('load',function(){measure();frame();});
+})();
+
 })();

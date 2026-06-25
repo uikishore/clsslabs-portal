@@ -1,4 +1,7 @@
-﻿/* ─── math captcha ─── */
+/* Always land at the top on load / reload / back-forward (unless a #section deep-link). */
+if('scrollRestoration' in history){history.scrollRestoration='manual';}
+
+/* ─── math captcha ─── */
 var _ca=0,_cb=0;
 function initCaptcha(){
   _ca=Math.floor(Math.random()*9)+1;
@@ -77,6 +80,15 @@ if(smoothEnabled){
 }
 addEventListener('resize',updateParallax);
 updateParallax();setNav(scrollY);
+
+/* ── land at the top on (re)load & bfcache restore, unless deep-linking to a #section ── */
+function landTop(){
+  if(location.hash){try{history.replaceState(null,'',location.pathname+location.search);}catch(e){}}
+  scrollTo(0,0);SS.target=SS.current=0;setNav(0);updateParallax();
+  requestAnimationFrame(function(){scrollTo(0,0);SS.target=SS.current=0;setNav(0);});
+}
+landTop();
+addEventListener('pageshow',landTop);
 
 /* ── scroll reveals (scoped to active page, scan-based) ── */
 function rvScope(){return document;}

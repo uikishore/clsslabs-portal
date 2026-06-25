@@ -6151,3 +6151,18 @@ html.js .rv.on {
     grid-template-columns: 1fr;
   }
 }
+
+/* OOH page — 4-step workflow grid (overrides .infra-road's 5-col) */
+.ooh-steps {
+  grid-template-columns: repeat(4, 1fr);
+}
+@media (max-width: 920px) {
+  .ooh-steps {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 560px) {
+  .ooh-steps {
+    grid-template-columns: 1fr;
+  }
+}

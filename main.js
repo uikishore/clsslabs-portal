@@ -1,3 +1,12 @@
+﻿/* ─── math captcha ─── */
+var _ca=0,_cb=0;
+function initCaptcha(){
+  _ca=Math.floor(Math.random()*9)+1;
+  _cb=Math.floor(Math.random()*9)+1;
+  var el=document.getElementById('cq');
+  if(el)el.textContent=_ca+' + '+_cb+' =';
+}
+document.addEventListener('DOMContentLoaded',initCaptcha);
 /* ════════════════ SIGNAL · interaction layer ════════════════ */
 (function(){
 'use strict';
@@ -287,6 +296,8 @@ window.doSub=function(){
   var first=fval('cf_first'),last=fval('cf_last'),email=fval('cf_email');
   if(!first||!last){flashErr(b,'Please add your name');return;}
   if(!validEmail(email)){flashErr(b,'Please add a valid email');return;}
+  var ans=parseInt((document.getElementById('cf_captcha')||{}).value,10);
+  if(isNaN(ans)||ans!==(_ca+_cb)){flashErr(b,'Please solve the human check');initCaptcha();return;}
   window.location.href=buildMail('New enquiry — '+first+' '+last,[['Name',first+' '+last],['Email',email],['Company',fval('cf_company')],['Phone',fval('cf_phone')],['Area of Interest',fval('cf_interest')],['Message',fval('cf_message')]]);
   sent(b,'Send Message →');
 };

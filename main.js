@@ -93,11 +93,11 @@ addEventListener('pageshow',landTop);
 /* ── scroll reveals (scoped to active page, scan-based) ── */
 function rvScope(){return document;}
 function revealAll(){rvScope().querySelectorAll('.rv:not(.on)').forEach(function(el){el.classList.add('on');});}
-function revealScan(){var vh=window.innerHeight||document.documentElement.clientHeight;rvScope().querySelectorAll('.rv:not(.on)').forEach(function(el){var r=el.getBoundingClientRect();if(r.top<vh*0.88&&r.bottom>-40){el.classList.add('on');}});}
+function revealScan(){var vh=window.innerHeight||document.documentElement.clientHeight;rvScope().querySelectorAll('.rv:not(.on)').forEach(function(el){var r=el.getBoundingClientRect();if(r.top<vh*0.92){el.classList.add('on');}});}
 function initRv(){revealScan();requestAnimationFrame(revealScan);}
 initRv();
 /* safety net: never leave content hidden if scroll/observer misbehaves (e.g. inside a non-scrolling frame) */
-setTimeout(revealAll,2600);
+setTimeout(function(){var vh=window.innerHeight||document.documentElement.clientHeight;rvScope().querySelectorAll('.rv:not(.on)').forEach(function(el){if(el.getBoundingClientRect().top<vh){el.classList.add('on');}});},2600);
 
 /* ════ SAP "Full-Cycle Excellence" — scroll-linked sticky card storytelling ════ */
 (function(){
@@ -198,7 +198,7 @@ if(!isTouch){
    links straight into #psnav. No SPA routing, no view transitions. */
 var navData = {
   products:   [['emsis','EMSIS'],['gst','GCS'],['evc','Vendor Collaboration'],['stt-portal','CLSS STT Portal'],['radio','Radio Automation'],['content-scheduler','Content Scheduler']],
-  services:   [['sap','SAP Applications'],['ent','Enterprise Apps'],['web','Web Dev'],['mob','Mobile Apps'],['bi','Business Intelligence'],['portal','Portal Solutions']],
+  services:   [['sap','SAP Applications'],['ent','Application Development'],['bi','Business Intelligence']],
   industries: [['i-media','Media & Broadcast'],['i-mfg','Manufacturing'],['i-dairy','Dairy & Agro'],['i-jwl','Jewellery']]
 };
 var pageType = {

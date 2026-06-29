@@ -221,14 +221,19 @@
 /* Track list */
 .ra-tl{background:var(--paper);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--shx)}
 .ra-tl-hd{display:grid;grid-template-columns:42px 1fr 90px 90px;gap:12px;align-items:center;padding:14px 20px;background:#fafbff;border-bottom:1px solid var(--line);font:600 10px var(--mono);color:var(--ink2);text-transform:uppercase;letter-spacing:1.4px}
-.ra-tr{display:grid;grid-template-columns:42px 1fr 90px 90px;gap:12px;align-items:center;padding:14px 20px;border-bottom:1px solid var(--line);transition:background .18s}
+.ra-tr{position:relative;display:grid;grid-template-columns:42px 1fr 90px 90px;gap:12px;align-items:center;padding:14px 20px;border-bottom:1px solid var(--line);overflow:hidden;transition:background .25s var(--ez),transform .25s var(--ez)}
 .ra-tr:last-child{border-bottom:0}
-.ra-tr:hover{background:#fafbff}
-.ra-tr-ic{width:34px;height:34px;border-radius:50%;background:var(--irisT);color:var(--iris2);display:flex;align-items:center;justify-content:center;font-size:13px}
+.ra-tr::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--spec);transform:scaleY(0);transition:transform .28s var(--ez)}
+.ra-tr:hover{background:linear-gradient(90deg,rgba(124,92,255,.12),rgba(200,75,224,.05) 55%,transparent);transform:translateX(5px)}
+.ra-tr:hover::before{transform:scaleY(1)}
+.ra-tr-ic{width:34px;height:34px;border-radius:50%;background:var(--irisT);color:var(--iris2);display:flex;align-items:center;justify-content:center;font-size:13px;transition:transform .28s var(--ez),background .28s var(--ez),color .28s var(--ez),box-shadow .28s var(--ez)}
+.ra-tr:hover .ra-tr-ic{background:var(--spec);color:#fff;transform:scale(1.15);box-shadow:0 8px 20px -6px rgba(124,92,255,.55)}
 .ra-tr-tt{font:600 14px var(--serif);color:var(--ink);letter-spacing:-.1px}
 .ra-tr-at{font:500 11px var(--mono);color:var(--ink2);text-transform:uppercase;letter-spacing:1.2px;margin-top:2px}
-.ra-tr-du{font:600 13px var(--mono);color:var(--ink);text-align:right}
-.ra-tr-tg{justify-self:end}
+.ra-tr-du{font:600 13px var(--mono);color:var(--ink);text-align:right;transition:color .25s var(--ez)}
+.ra-tr:hover .ra-tr-du{color:var(--iris)}
+.ra-tr-tg{justify-self:end;transition:transform .25s var(--ez)}
+.ra-tr:hover .ra-tr-tg{transform:scale(1.07)}
 @media (max-width:700px){.ra-tl-hd,.ra-tr{grid-template-columns:42px 1fr;}.ra-tl-hd > :nth-child(3),.ra-tl-hd > :nth-child(4),.ra-tr-du,.ra-tr-tg{display:none}}
 
 /* Signal source meter */

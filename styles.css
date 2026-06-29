@@ -25,6 +25,7 @@ html {
   --iris: #4f46e5; /* solid interactive accent */
   --iris2: #3f37c9;
   --irisT: #ecebfe;
+  --spec: linear-gradient(100deg, #4f46e5 0%, #7c5cff 28%, #c84be0 52%, #ff7a8a 78%, #f19f00 100%);
   --spark: #fda604;
   --sparkT: #fff4e0; /* iris tint */
   --violet: #7c5cff;
@@ -6736,7 +6737,7 @@ html.js .er-float.rv.on {
   .erf-chip { animation: none; }
 }
 
-/* ── Reference-stack split: copy (left) + reused floating dashboard (right) ── */
+/* ── Reference-stack split: copy (left) + network topology (right) ── */
 .ref-split {
   display: grid;
   grid-template-columns: 1.05fr 0.95fr;
@@ -6744,20 +6745,93 @@ html.js .er-float.rv.on {
   align-items: center;
 }
 .ref-copy { max-width: 560px; }
-/* compact, non-sticky variant of the floating dashboard for this section */
-.ref-split .er-float {
+
+/* network topology panel */
+.netmap {
   position: relative;
-  top: auto;
-  min-height: 360px;
+  width: 100%;
+  max-width: 462px;
+  margin: 0 auto;
+  padding: 18px 18px 14px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  box-shadow: 0 34px 80px -24px rgba(21, 23, 58, 0.30), 0 10px 28px -10px rgba(21, 23, 58, 0.12);
+  overflow: hidden;
 }
-/* re-frame chips around the card and keep them inside the right column */
-.ref-split .erf-c1 { top: 8px; left: -10px; }
-.ref-split .erf-c2 { top: 104px; right: -6px; }
-.ref-split .erf-c3 { bottom: 26px; left: -18px; }
+.netmap::before { /* faint blueprint grid, faded toward the edges */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 26px 26px;
+  opacity: 0.5;
+  -webkit-mask: radial-gradient(circle at 50% 42%, #000, transparent 78%);
+  mask: radial-gradient(circle at 50% 42%, #000, transparent 78%);
+  pointer-events: none;
+}
+.netmap-tag {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: var(--iris2);
+}
+.netmap-tag::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--grn);
+  box-shadow: 0 0 0 0 rgba(14, 159, 110, 0.5);
+  animation: nmBeacon 2.4s ease-out infinite;
+}
+.netmap-svg { position: relative; z-index: 1; display: block; width: 100%; height: auto; overflow: visible; }
+
+/* links */
+.nm-links path { stroke: var(--line2); stroke-width: 2; fill: none; }
+.nm-links .nm-stem { stroke-width: 1.4; }
+.nm-mon-link { stroke: var(--line2); stroke-width: 1.5; stroke-dasharray: 2 5; fill: none; animation: nmDash 7s linear infinite; }
+.nm-flow use { stroke: url(#nmFlow); stroke-width: 2.4; fill: none; stroke-linecap: round; stroke-dasharray: 9 13; animation: nmFlowMove 1s linear infinite; }
+@keyframes nmFlowMove { to { stroke-dashoffset: -22; } }
+@keyframes nmDash { to { stroke-dashoffset: -28; } }
+
+/* client devices + traveling pulses */
+.nm-ends circle { fill: var(--mist); stroke: var(--line2); stroke-width: 1.4; }
+.nm-pulse { fill: #fff; stroke: var(--violet); stroke-width: 2; filter: drop-shadow(0 0 4px rgba(124, 92, 255, 0.85)); }
+
+/* nodes */
+.nm-node rect { fill: var(--paper); stroke: var(--line); stroke-width: 1.2; filter: drop-shadow(0 9px 16px rgba(21, 23, 58, 0.10)); }
+.nm-node-core rect { stroke: url(#nmFlow); stroke-width: 1.8; filter: drop-shadow(0 12px 24px rgba(124, 92, 255, 0.28)); }
+.nm-ic path, .nm-ic rect { stroke: var(--iris); stroke-width: 1.7; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.nm-ic .nm-fill { fill: var(--iris); stroke: none; }
+.nm-node-core .nm-ic path, .nm-node-core .nm-ic rect { stroke: var(--violet); }
+.nm-node-core .nm-ic .nm-fill { fill: var(--violet); }
+.nm-t { fill: var(--ink); font-family: var(--serif); font-size: 13.5px; font-weight: 600; }
+.nm-t.sm { font-size: 12.5px; }
+.nm-s { fill: var(--dim); font-family: var(--mono); font-size: 9px; letter-spacing: 0.2px; }
+.nm-led { fill: var(--grn); animation: nmLed 2.6s ease-in-out infinite; }
+.nm-coreglow { animation: nmGlowPulse 4.2s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+
+@keyframes nmBeacon { 0% { box-shadow: 0 0 0 0 rgba(14, 159, 110, 0.5); } 70%, 100% { box-shadow: 0 0 0 7px rgba(14, 159, 110, 0); } }
+@keyframes nmLed { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+@keyframes nmGlowPulse { 0%, 100% { opacity: 0.7; transform: scale(0.94); } 50% { opacity: 1; transform: scale(1.04); } }
+
 @media (max-width: 920px) {
   .ref-split { grid-template-columns: 1fr; gap: 36px; }
-  .ref-split .er-float { order: 2; min-height: 380px; }
-  .ref-split .erf-c2 { right: 0; }
+  .netmap { order: 2; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nm-flow use, .nm-mon-link, .nm-led, .nm-coreglow, .netmap-tag::before { animation: none; }
+  .nm-pulse { display: none; }
 }
 
 /* ════════ CTA band — animated geometric background shapes ════════ */
@@ -7245,7 +7319,11 @@ html.js .er-float.rv.on {
 .stt-sub{margin-bottom:24px;max-width:44ch}
 .stt-feats{display:flex;flex-direction:column;gap:15px}
 .stt-feat{display:flex;gap:14px;align-items:flex-start}
-.stt-ficon{flex:none;width:38px;height:38px;border-radius:11px;display:grid;place-items:center;color:#fff;background:var(--spec);box-shadow:0 8px 18px -8px rgba(79,70,229,.6)}
+.stt-ficon{flex:none;width:38px;height:38px;border-radius:11px;display:grid;place-items:center;color:#fff;position:relative;overflow:hidden;background:linear-gradient(140deg,#4f46e5,#7c5cff);box-shadow:0 9px 20px -9px rgba(79,70,229,.7)}
+.stt-ficon svg{position:relative;z-index:1}
+.stt-ficon::after{content:"";position:absolute;inset:0;background:linear-gradient(155deg,rgba(255,255,255,.34),rgba(255,255,255,0) 58%);pointer-events:none}
+.stt-feat:nth-child(2) .stt-ficon{background:linear-gradient(140deg,#7c5cff,#c84be0);box-shadow:0 9px 20px -9px rgba(168,72,216,.62)}
+.stt-feat:nth-child(3) .stt-ficon{background:linear-gradient(140deg,#e1457f,#ff7a8a);box-shadow:0 9px 20px -9px rgba(255,122,138,.6)}
 .stt-ftx{display:flex;flex-direction:column;gap:2px}
 .stt-ftx strong{font-size:14.5px;font-weight:650;color:var(--ink);letter-spacing:-.2px}
 .stt-ftx span{font-size:13px;line-height:1.55;color:var(--mid)}
@@ -7256,9 +7334,16 @@ html.js .er-float.rv.on {
 @keyframes sttPulse{0%{box-shadow:0 0 0 0 rgba(240,70,107,.5)}70%{box-shadow:0 0 0 8px rgba(240,70,107,0)}100%{box-shadow:0 0 0 0 rgba(240,70,107,0)}}
 .stt-wave-label{font-family:var(--mono);font-size:11.5px;letter-spacing:.3px;color:var(--mid)}
 .stt-live{margin-left:auto;font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:1px;color:var(--iris);background:var(--irisT);padding:3px 8px;border-radius:6px}
-.stt-wave{display:flex;align-items:center;gap:3px;height:54px;margin-bottom:13px}
-.stt-wave i{flex:1 1 0;min-width:0;height:var(--h,40%);border-radius:4px;background:var(--spec);opacity:.9;transform-origin:center;animation:sttBar 1.25s ease-in-out infinite;animation-delay:var(--d,0s)}
-@keyframes sttBar{0%,100%{transform:scaleY(.4)}50%{transform:scaleY(1)}}
+.stt-wave{position:relative;display:flex;align-items:center;gap:3px;height:56px;margin-bottom:13px;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.stt-wave i{flex:1 1 0;min-width:0;height:var(--h,40%);border-radius:5px;background:linear-gradient(180deg,#8b6cff,#4f46e5);box-shadow:0 2px 8px -3px rgba(79,70,229,.55);transform-origin:center;animation:sttBar var(--dur,1.3s) cubic-bezier(.45,.05,.55,.95) infinite;animation-delay:var(--d,0s)}
+.stt-wave i:nth-child(n+11){background:linear-gradient(180deg,#a874f2,#7c5cff)}
+.stt-wave i:nth-child(n+22){background:linear-gradient(180deg,#d65fe0,#c84be0)}
+.stt-wave i:nth-child(n+32){background:linear-gradient(180deg,#ff8e9b,#ec5b86)}
+.stt-wave i:nth-child(2n){animation-duration:1.5s}
+.stt-wave i:nth-child(3n){animation-duration:1.7s}
+.stt-wave::after{content:"";position:absolute;top:-10%;bottom:-10%;left:-45%;width:38%;pointer-events:none;background:linear-gradient(90deg,transparent,rgba(124,92,255,.16),rgba(255,255,255,.34),rgba(124,92,255,.16),transparent);animation:sttScan 3.6s cubic-bezier(.55,0,.45,1) infinite}
+@keyframes sttBar{0%,100%{transform:scaleY(.32);opacity:.6}50%{transform:scaleY(1);opacity:1}}
+@keyframes sttScan{0%{left:-45%}100%{left:115%}}
 .stt-cap{font-size:13px;line-height:1.65;color:var(--ink2)}
 .stt-cap mark{background:linear-gradient(120deg,rgba(79,70,229,.18),rgba(225,29,114,.16));color:var(--ink);font-weight:600;border-radius:4px;padding:1px 4px}
 .stt-search{display:flex;align-items:center;gap:10px;background:var(--porcelain);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
@@ -7271,7 +7356,7 @@ html.js .er-float.rv.on {
 .stt-res{display:flex;align-items:center;gap:11px;background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:10px 13px;font-size:12.5px;color:var(--ink2)}
 .stt-res-t{flex:none;font-family:var(--mono);font-size:10.5px;font-weight:700;color:var(--iris);background:var(--irisT);padding:3px 7px;border-radius:6px}
 .stt-res mark{background:rgba(124,92,255,.15);color:var(--ink);border-radius:3px;padding:0 3px}
-@media (prefers-reduced-motion:reduce){.stt-wave i,.stt-rec,.stt-caret{animation:none}}
+@media (prefers-reduced-motion:reduce){.stt-wave i,.stt-wave::after,.stt-rec,.stt-caret{animation:none}}
 @media (max-width:860px){.stt-grid{grid-template-columns:1fr;gap:30px}}
 
 /* ===== Industry pages — client / capability marquee (dark spotlight) ===== */

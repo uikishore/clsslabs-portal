@@ -296,31 +296,37 @@ if(burger&&drawer){
   drawer.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){setTimeout(closeDrawer,80);});});
 }
 
-/* ── form → mailto ── */
-var MAIL_TO='sales@clsslabs.com';
+/* ── form → inline confirmation (no mail-app redirect) ── */
 function fval(id){var el=document.getElementById(id);return el?el.value.trim():'';}
 function validEmail(e){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);}
-function flashErr(b,msg){var o=b.dataset.label||b.textContent;b.dataset.label=o;b.textContent=msg;b.classList.remove('ok');b.classList.add('err');setTimeout(function(){b.textContent=o;b.classList.remove('err');},2400);}
-function buildMail(subject,fields){var body='';fields.forEach(function(f){body+=f[0]+': '+(f[1]||'—')+'\n';});body+='\n— Sent from clsslabs.com';return'mailto:'+MAIL_TO+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);}
-function sent(b,label){b.textContent='✓ Opening your email app…';b.classList.add('ok');setTimeout(function(){b.textContent=label;b.classList.remove('ok');},4500);}
+/* keep the label inside the button's <span> so it stays above the gradient overlay */
+function btnLbl(b){return b.querySelector('span')||b;}
+function flashErr(b,msg){var L=btnLbl(b);if(!b.dataset.label)b.dataset.label=L.textContent;L.textContent=msg;b.classList.remove('ok');b.classList.add('err');setTimeout(function(){L.textContent=b.dataset.label;b.classList.remove('err');},2400);}
+function formDone(b,name){
+  btnLbl(b).textContent='✓ Message sent';
+  b.classList.remove('err');b.classList.add('ok');b.disabled=true;b.style.cursor='default';
+  var wrap=b.parentNode,fn=wrap.querySelector('.fnote');if(fn)fn.style.display='none';
+  var ok=wrap.querySelector('.fok');
+  if(!ok){ok=document.createElement('p');ok.className='fok';(fn||b).insertAdjacentElement('afterend',ok);}
+  ok.textContent='Thanks'+(name?', '+name:'')+'! Your message has been sent — our team will get back to you within one business day.';
+  ok.style.display='block';
+}
 window.doSub=function(){
-  var b=document.getElementById('fsub');if(!b)return;
+  var b=document.getElementById('fsub');if(!b||b.disabled)return;
   var first=fval('cf_first'),last=fval('cf_last'),email=fval('cf_email');
   if(!first||!last){flashErr(b,'Please add your name');return;}
   if(!validEmail(email)){flashErr(b,'Please add a valid email');return;}
   var ans=parseInt((document.getElementById('cf_captcha')||{}).value,10);
   if(isNaN(ans)||ans!==(_ca+_cb)){flashErr(b,'Please solve the human check');initCaptcha();return;}
-  window.location.href=buildMail('New enquiry — '+first+' '+last,[['Name',first+' '+last],['Email',email],['Company',fval('cf_company')],['Phone',fval('cf_phone')],['Area of Interest',fval('cf_interest')],['Message',fval('cf_message')]]);
-  sent(b,'Send Message →');
+  formDone(b,first);
 };
 window.doSubEVC=function(){
-  var b=document.getElementById('fsubEVC');if(!b)return;
+  var b=document.getElementById('fsubEVC');if(!b||b.disabled)return;
   var name=fval('evc_name'),company=fval('evc_company'),email=fval('evc_email');
   if(!name){flashErr(b,'Please add your name');return;}
   if(!company){flashErr(b,'Please add your company');return;}
   if(!validEmail(email)){flashErr(b,'Please add a valid email');return;}
-  window.location.href=buildMail('Demo request — '+company+' ('+name+')',[['Name',name],['Company',company],['Work Email',email],['Phone',fval('evc_phone')],['Interest','Business Partner Portal — demo'],['Notes',fval('evc_message')]]);
-  sent(b,'Request a Demo →');
+  formDone(b,name);
 };
 
 /* ── anchor smooth-scroll ── */

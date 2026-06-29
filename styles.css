@@ -2337,6 +2337,19 @@ html.js .htit.on .ln > span {
   text-align: center;
   margin-top: 13px;
 }
+/* inline success confirmation shown after a form is submitted */
+.fok {
+  margin-top: 14px;
+  padding: 13px 16px;
+  border-radius: 12px;
+  background: var(--grnT);
+  border: 1px solid rgba(14, 159, 110, 0.25);
+  color: var(--grn);
+  font-size: 13.5px;
+  font-weight: 500;
+  text-align: center;
+  line-height: 1.55;
+}
 
 /* ═══════════ FOOTER (indigo-ink) ═══════════ */
 #footer {
@@ -2567,6 +2580,10 @@ html.js .htit.on .ln > span {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 18px;
+}
+/* 4-up on desktop; the responsive .fgrid rules below collapse it to 2-up then 1-up */
+.fgrid-4 {
+  grid-template-columns: repeat(4, 1fr);
 }
 .fcard {
   padding: 28px;

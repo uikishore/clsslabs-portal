@@ -219,21 +219,21 @@
 @media (max-width:700px){.ra-hkwall{grid-template-columns:repeat(3,1fr)}}
 
 /* Track list */
-.ra-tl{background:var(--paper);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--shx)}
-.ra-tl-hd{display:grid;grid-template-columns:42px 1fr 90px 90px;gap:12px;align-items:center;padding:14px 20px;background:#fafbff;border-bottom:1px solid var(--line);font:600 10px var(--mono);color:var(--ink2);text-transform:uppercase;letter-spacing:1.4px}
-.ra-tr{position:relative;display:grid;grid-template-columns:42px 1fr 90px 90px;gap:12px;align-items:center;padding:14px 20px;border-bottom:1px solid var(--line);overflow:hidden;transition:background .25s var(--ez),transform .25s var(--ez)}
+.ra-tl{background:linear-gradient(158deg,#191540 0%,#221a52 52%,#2b1f60 100%);border:1px solid rgba(124,92,255,.26);border-radius:18px;overflow:hidden;box-shadow:0 30px 70px -34px rgba(31,23,84,.65)}
+.ra-tl-hd{display:grid;grid-template-columns:42px 1fr 90px 90px;gap:12px;align-items:center;padding:14px 20px;background:rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.10);font:600 10px var(--mono);color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:1.4px}
+.ra-tr{position:relative;display:grid;grid-template-columns:42px 1fr 90px 90px;gap:12px;align-items:center;padding:14px 20px;border-bottom:1px solid rgba(255,255,255,.07);overflow:hidden;transition:background .3s var(--ez),transform .3s var(--ez)}
 .ra-tr:last-child{border-bottom:0}
-.ra-tr::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--spec);transform:scaleY(0);transition:transform .28s var(--ez)}
-.ra-tr:hover{background:linear-gradient(90deg,rgba(124,92,255,.12),rgba(200,75,224,.05) 55%,transparent);transform:translateX(5px)}
-.ra-tr:hover::before{transform:scaleY(1)}
-.ra-tr-ic{width:34px;height:34px;border-radius:50%;background:var(--irisT);color:var(--iris2);display:flex;align-items:center;justify-content:center;font-size:13px;transition:transform .28s var(--ez),background .28s var(--ez),color .28s var(--ez),box-shadow .28s var(--ez)}
-.ra-tr:hover .ra-tr-ic{background:var(--spec);color:#fff;transform:scale(1.15);box-shadow:0 8px 20px -6px rgba(124,92,255,.55)}
-.ra-tr-tt{font:600 14px var(--serif);color:var(--ink);letter-spacing:-.1px}
-.ra-tr-at{font:500 11px var(--mono);color:var(--ink2);text-transform:uppercase;letter-spacing:1.2px;margin-top:2px}
-.ra-tr-du{font:600 13px var(--mono);color:var(--ink);text-align:right;transition:color .25s var(--ez)}
-.ra-tr:hover .ra-tr-du{color:var(--iris)}
-.ra-tr-tg{justify-self:end;transition:transform .25s var(--ez)}
-.ra-tr:hover .ra-tr-tg{transform:scale(1.07)}
+.ra-tr::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--spec);transform:scaleY(0);transition:transform .3s var(--ez)}
+.ra-tr-ic{width:34px;height:34px;border-radius:50%;background:rgba(124,92,255,.18);color:#cfc8ff;display:flex;align-items:center;justify-content:center;font-size:13px;transition:transform .3s var(--ez),background .3s var(--ez),color .3s var(--ez),box-shadow .3s var(--ez)}
+.ra-tr-tt{font:600 14px var(--serif);color:#fff;letter-spacing:-.1px}
+.ra-tr-at{font:500 11px var(--mono);color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:1.2px;margin-top:2px}
+.ra-tr-du{font:600 13px var(--mono);color:rgba(255,255,255,.72);text-align:right;transition:color .3s var(--ez)}
+.ra-tr-tg{justify-self:end;transition:transform .3s var(--ez)}
+.ra-tr:hover,.ra-tr.is-cue{background:linear-gradient(90deg,rgba(124,92,255,.24),rgba(200,75,224,.10) 55%,transparent);transform:translateX(6px)}
+.ra-tr:hover::before,.ra-tr.is-cue::before{transform:scaleY(1)}
+.ra-tr:hover .ra-tr-ic,.ra-tr.is-cue .ra-tr-ic{background:var(--spec);color:#fff;transform:scale(1.16);box-shadow:0 8px 22px -6px rgba(124,92,255,.7)}
+.ra-tr:hover .ra-tr-du,.ra-tr.is-cue .ra-tr-du{color:#fff}
+.ra-tr:hover .ra-tr-tg,.ra-tr.is-cue .ra-tr-tg{transform:scale(1.08)}
 @media (max-width:700px){.ra-tl-hd,.ra-tr{grid-template-columns:42px 1fr;}.ra-tl-hd > :nth-child(3),.ra-tl-hd > :nth-child(4),.ra-tr-du,.ra-tr-tg{display:none}}
 
 /* Signal source meter */
@@ -257,6 +257,42 @@
 /* Workflow numbered tile */
 .ra-step{position:relative}
 .ra-step .ra-num{position:absolute;top:14px;right:18px;font:700 42px var(--mono);color:var(--line2);line-height:1;letter-spacing:-1px}
+
+/* ═══ How-it-runs: signal-chain stepper (unique to this section) ═══ */
+.raflow{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:6px}
+/* the live rail threading every node */
+.raflow-rail{position:absolute;top:28px;left:12.5%;right:12.5%;height:2px;background:var(--line2);border-radius:2px;overflow:hidden}
+.raflow-rail::after{content:"";position:absolute;top:0;left:0;height:100%;width:34%;background:var(--spec);border-radius:2px;animation:raflow-run 3.4s var(--ez) infinite}
+@keyframes raflow-run{0%{transform:translateX(-120%)}100%{transform:translateX(420%)}}
+
+.raflow-step{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 14px}
+/* numbered node sitting on the rail; porcelain ring punches a gap in the line */
+.raflow-node{position:relative;z-index:2;width:56px;height:56px;border-radius:50%;background:var(--paper);border:2px solid var(--line2);display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 7px var(--porcelain);transition:transform .35s var(--ez),border-color .35s var(--ez),background .35s var(--ez)}
+.raflow-num{font:700 17px var(--mono);color:var(--ink2);letter-spacing:-.5px;transition:color .35s var(--ez)}
+
+.raflow-ico{font-size:26px;line-height:1;margin:22px 0 13px;filter:saturate(.18) opacity(.8);transition:transform .35s var(--ez),filter .35s var(--ez)}
+.raflow-tt{font:600 17px var(--serif);letter-spacing:-.3px;color:var(--ink);margin-bottom:8px}
+.raflow-ds{font-size:13.5px;color:var(--mid);line-height:1.6;max-width:236px;margin:0 auto}
+
+/* hover lights the node up onto the gradient */
+.raflow-step:hover .raflow-node{border-color:transparent;background:var(--spec);transform:translateY(-4px) scale(1.05)}
+.raflow-step:hover .raflow-num{color:#fff}
+.raflow-step:hover .raflow-ico{filter:none;transform:translateY(-2px) scale(1.08)}
+
+/* final node = ON AIR, always live */
+.raflow-node--air{border-color:var(--coral)}
+.raflow-node--air::before{content:"";position:absolute;inset:-2px;border-radius:50%;border:2px solid var(--coral);opacity:0;animation:raflow-ring 1.9s var(--ez2) infinite}
+@keyframes raflow-ring{0%{transform:scale(1);opacity:.75}100%{transform:scale(1.65);opacity:0}}
+.raflow-air-tag{display:inline-flex;align-items:center;gap:6px;margin-top:11px;padding:4px 10px;border-radius:99px;background:#fff0f1;color:#e0405a;font:600 9px var(--mono);text-transform:uppercase;letter-spacing:1.4px}
+.raflow-air-tag i{width:6px;height:6px;border-radius:50%;background:#e0405a;animation:ra-pulse 1.6s infinite}
+
+@media(max-width:880px){
+  .raflow{grid-template-columns:repeat(2,1fr);gap:34px 0}
+  .raflow-rail{display:none}
+}
+@media(max-width:520px){
+  .raflow{grid-template-columns:1fr;gap:28px}
+}
 
 /* Keyframes */
 @keyframes ra-pulse{0%{box-shadow:0 0 0 0 rgba(79,70,229,.55)}70%{box-shadow:0 0 0 10px rgba(79,70,229,0)}100%{box-shadow:0 0 0 0 rgba(79,70,229,0)}}
@@ -432,11 +468,33 @@
 <section class="S Salf"><div class="W">
   <div class="eyebrow rv">How it runs</div>
   <h2 class="h1 rv d1" style="margin:6px 0 28px">From library to on-air <span class="hl">in four steps</span></h2>
-  <div class="fgrid" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px">
-    <div class="fcard ra-step rv"><span class="ra-num">01</span><div class="fiico">📚</div><div class="fitl">Build the Library</div><div class="fdsc">Ingest music, beds and spots; auto-detect cues and tag every clip for retrieval.</div></div>
-    <div class="fcard ra-step rv d1"><span class="ra-num">02</span><div class="fiico">📡</div><div class="fitl">Program the Clock</div><div class="fdsc">Lay out rotations, dayparts and walk-in/walk-out rules — preview the next hour at a glance.</div></div>
-    <div class="fcard ra-step rv d2"><span class="ra-num">03</span><div class="fiico">🛰️</div><div class="fitl">Patch Live Sources</div><div class="fdsc">Bring in satellite, STL and IP streams; monitor every feed with live meters.</div></div>
-    <div class="fcard ra-step rv"><span class="ra-num">04</span><div class="fiico">🎚️</div><div class="fitl">Go On Air</div><div class="fdsc">Hand off to 24/7 automation — gapless segue, hotkey fire, unattended through the night.</div></div>
+  <div class="raflow rv">
+    <div class="raflow-rail" aria-hidden="true"></div>
+    <div class="raflow-step">
+      <div class="raflow-node"><span class="raflow-num">01</span></div>
+      <div class="raflow-ico">📚</div>
+      <div class="raflow-tt">Build the Library</div>
+      <div class="raflow-ds">Ingest music, beds and spots; auto-detect cues and tag every clip for retrieval.</div>
+    </div>
+    <div class="raflow-step">
+      <div class="raflow-node"><span class="raflow-num">02</span></div>
+      <div class="raflow-ico">📡</div>
+      <div class="raflow-tt">Program the Clock</div>
+      <div class="raflow-ds">Lay out rotations, dayparts and walk-in/walk-out rules — preview the next hour at a glance.</div>
+    </div>
+    <div class="raflow-step">
+      <div class="raflow-node"><span class="raflow-num">03</span></div>
+      <div class="raflow-ico">🛰️</div>
+      <div class="raflow-tt">Patch Live Sources</div>
+      <div class="raflow-ds">Bring in satellite, STL and IP streams; monitor every feed with live meters.</div>
+    </div>
+    <div class="raflow-step">
+      <div class="raflow-node raflow-node--air"><span class="raflow-num">04</span></div>
+      <div class="raflow-ico">🎚️</div>
+      <div class="raflow-tt">Go On Air</div>
+      <div class="raflow-ds">Hand off to 24/7 automation — gapless segue, hotkey fire, unattended through the night.</div>
+      <span class="raflow-air-tag"><i></i>On Air</span>
+    </div>
   </div>
 </div></section>
 
@@ -513,6 +571,21 @@
     p.addEventListener('touchstart', function(){ p.classList.add('ra-pressed'); }, {passive:true});
     p.addEventListener('touchend', clear);
   });
+  // auto-cue: highlight each track row in sequence; pause on hover
+  (function(){
+    var tl = document.querySelector('.ra-tl');
+    if(!tl) return;
+    var rows = Array.prototype.slice.call(tl.querySelectorAll('.ra-tr'));
+    if(rows.length < 2) return;
+    if(window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+    var i = 0, paused = false;
+    function clearCue(){ rows.forEach(function(r){ r.classList.remove('is-cue'); }); }
+    function step(){ if(paused) return; clearCue(); rows[i].classList.add('is-cue'); i = (i + 1) % rows.length; }
+    tl.addEventListener('mouseenter', function(){ paused = true; clearCue(); });
+    tl.addEventListener('mouseleave', function(){ paused = false; });
+    step();
+    setInterval(step, 1900);
+  })();
 })();
 </script>
 

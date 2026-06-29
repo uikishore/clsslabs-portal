@@ -6736,6 +6736,30 @@ html.js .er-float.rv.on {
   .erf-chip { animation: none; }
 }
 
+/* ── Reference-stack split: copy (left) + reused floating dashboard (right) ── */
+.ref-split {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 48px;
+  align-items: center;
+}
+.ref-copy { max-width: 560px; }
+/* compact, non-sticky variant of the floating dashboard for this section */
+.ref-split .er-float {
+  position: relative;
+  top: auto;
+  min-height: 360px;
+}
+/* re-frame chips around the card and keep them inside the right column */
+.ref-split .erf-c1 { top: 8px; left: -10px; }
+.ref-split .erf-c2 { top: 104px; right: -6px; }
+.ref-split .erf-c3 { bottom: 26px; left: -18px; }
+@media (max-width: 920px) {
+  .ref-split { grid-template-columns: 1fr; gap: 36px; }
+  .ref-split .er-float { order: 2; min-height: 380px; }
+  .ref-split .erf-c2 { right: 0; }
+}
+
 /* ════════ CTA band — animated geometric background shapes ════════ */
 .ctab::before { z-index: 0; }
 .ctab::after { z-index: 2; }
@@ -6798,6 +6822,27 @@ html.js .er-float.rv.on {
 @keyframes cfxSpin { to { transform: rotate(360deg); } }
 @keyframes cfxDriftX { 0%, 100% { transform: translateX(0); opacity: 0.55; } 50% { transform: translateX(46px); opacity: 1; } }
 @media (prefers-reduced-motion: reduce) { .cfx { animation: none !important; } }
+/* CTA band — soft parallax glow orbs (drift on scroll) */
+.cta-glow {
+  position: absolute;
+  width: 360px;
+  height: 360px;
+  right: 6%;
+  top: calc(50% - 180px);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0) 70%);
+  filter: blur(14px);
+  pointer-events: none;
+  will-change: transform;
+}
+.cta-glow-2 {
+  width: 240px;
+  height: 240px;
+  right: 30%;
+  top: auto;
+  bottom: -80px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0) 70%);
+}
 
 /* SFA page — responsive grid columns (channels 2-col, personas 4-col) */
 .sfa-channels { grid-template-columns: repeat(2, 1fr); }
@@ -7228,3 +7273,56 @@ html.js .er-float.rv.on {
 .stt-res mark{background:rgba(124,92,255,.15);color:var(--ink);border-radius:3px;padding:0 3px}
 @media (prefers-reduced-motion:reduce){.stt-wave i,.stt-rec,.stt-caret{animation:none}}
 @media (max-width:860px){.stt-grid{grid-template-columns:1fr;gap:30px}}
+
+/* ===== Industry pages — client / capability marquee (dark spotlight) ===== */
+.cw-panel{position:relative;margin-top:clamp(44px,5vw,64px);border-radius:24px;padding:clamp(30px,4vw,48px);overflow:hidden;background:radial-gradient(130% 130% at 0% 0%,rgba(124,92,255,.20),transparent 48%),radial-gradient(120% 130% at 100% 100%,rgba(225,29,114,.14),transparent 52%),linear-gradient(155deg,#1c1e4d 0%,#15173a 58%,#0f1130 100%);border:1px solid rgba(255,255,255,.09);box-shadow:0 44px 100px -54px rgba(15,17,48,.85)}
+.cw-panel::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--spec);z-index:2}
+.cw-top{position:relative;z-index:1;display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:end;margin-bottom:30px}
+.cw-eye{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:11.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#c3c0f7;margin-bottom:13px}
+.cw-eye::before{content:"";width:22px;height:1.5px;border-radius:2px;background:linear-gradient(90deg,#7c5cff,rgba(124,92,255,.1))}
+.cw-eye::after{content:"";width:5px;height:5px;border-radius:50%;background:#f6a623;box-shadow:0 0 8px rgba(246,166,35,.7)}
+.cw-h{font-family:var(--serif);font-size:clamp(22px,2.9vw,31px);font-weight:800;letter-spacing:-.6px;line-height:1.13;color:#fff}
+.cw-p{font-size:14px;line-height:1.75;color:rgba(255,255,255,.52)}
+.cw-marquee{position:relative;z-index:1;-webkit-mask:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.cw-row{overflow:hidden}
+.cw-row + .cw-row{margin-top:13px}
+.cw-track{display:flex;gap:13px;width:max-content;will-change:transform}
+.cw-trackL{animation:cwScrollL 46s linear infinite}
+.cw-trackR{animation:cwScrollR 46s linear infinite}
+@keyframes cwScrollL{from{transform:translateX(0)}to{transform:translateX(-25%)}}
+@keyframes cwScrollR{from{transform:translateX(-25%)}to{transform:translateX(0)}}
+.cw-marquee:hover .cw-track{animation-play-state:paused}
+.cw-chip{flex:none;display:flex;align-items:center;gap:11px;padding:13px 22px;border-radius:14px;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.11);box-shadow:inset 0 1px 0 rgba(255,255,255,.07);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);white-space:nowrap;transition:transform .3s var(--ez),background .3s,border-color .3s,box-shadow .3s}
+.cw-chip:hover{transform:translateY(-3px);background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.24);box-shadow:0 14px 34px -14px rgba(124,92,255,.6),inset 0 1px 0 rgba(255,255,255,.12)}
+.cw-chip b{font-size:15px;font-weight:600;color:rgba(255,255,255,.92);letter-spacing:-.2px}
+.cw-dot{width:9px;height:9px;border-radius:50%;background:var(--spec);flex:none;box-shadow:0 0 9px rgba(124,92,255,.85)}
+@media (max-width:760px){.cw-top{grid-template-columns:1fr;gap:14px;margin-bottom:22px}.cw-panel{border-radius:20px}}
+@media (prefers-reduced-motion:reduce){.cw-marquee{-webkit-mask:none;mask:none}.cw-row{overflow:visible}.cw-row + .cw-row{display:none}.cw-track{animation:none;flex-wrap:wrap;width:auto}.cw-dup{display:none}}
+
+/* ════════════════ Light / elegant CTA band (overrides the dark .ctab) ════════════════ */
+.ctab {
+  border: 1px solid #E7E3FB;
+  box-shadow: 0 24px 60px -30px rgba(79, 70, 229, 0.30);
+}
+.ctab::before {
+  background: linear-gradient(115deg, #EFF1FF 0%, #FAF9FF 48%, #F2ECFE 100%);
+  opacity: 1;
+}
+.cbl h3 { color: var(--ink); }
+.cbl p  { color: var(--mid); }
+.ctab .bw {
+  background: var(--iris);
+  color: #fff;
+  box-shadow: 0 10px 26px -10px rgba(79, 70, 229, 0.55);
+}
+.ctab .bw:hover {
+  background: var(--iris2);
+  box-shadow: 0 16px 38px -12px rgba(79, 70, 229, 0.50);
+}
+/* decorative shapes retinted faint iris so they read on the light surface */
+.ctab::after { opacity: 0.45; }
+.cfx-ring-lg { border-color: rgba(79, 70, 229, 0.14); }
+.cfx-ring-md { border-color: rgba(79, 70, 229, 0.16); }
+.cfx-square  { border-color: rgba(124, 92, 255, 0.18); }
+.cfx-dot     { background: rgba(124, 92, 255, 0.55); }
+.cfx-line    { background: linear-gradient(90deg, transparent, rgba(79, 70, 229, 0.22), transparent); }

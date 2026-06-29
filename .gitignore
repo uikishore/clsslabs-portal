@@ -1,0 +1,5 @@
+# Local Claude Code session/config data
+.claude/
+
+# Build / export artifacts
+*.zip

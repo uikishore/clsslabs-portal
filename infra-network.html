@@ -176,7 +176,7 @@
   <div><div style="margin-bottom:12px"><span class="bdg bgr">LAN · WAN · SD-WAN · Wi-Fi · VPN</span></div><div class="eyebrow">IT Infrastructure · Pillar 01</div>
   <h1 style="font-size:clamp(34px,5vw,60px);font-weight:800;letter-spacing:-2px;line-height:1.06;margin-bottom:20px">Network &amp;<br><span class="hl">Connectivity</span></h1>
   <p class="sub" style="margin-bottom:28px">The foundational layer everything depends on — a resilient three-tier network from ISP edge to access layer, engineered with zero single points of failure.</p>
-  <div style="display:flex;gap:12px;flex-wrap:wrap"><a class="bp" href="contact.html">Talk to an Expert <span class="arr">→</span></a><a class="bgo" href="infra.html">← All Infrastructure</a></div>
+  <div style="display:flex;gap:12px;flex-wrap:wrap"><a class="bp" href="contact.html">Talk to Us <span class="arr">→</span></a><a class="bgo" href="infra.html">← All Infrastructure</a></div>
   <div class="mrow"><div class="mc"><div class="mcn">99.99%</div><div class="mcl">Uptime Target</div></div><div class="mc"><div class="mcn">0</div><div class="mcl">Single Points of Failure</div></div><div class="mc"><div class="mcn">3-Tier</div><div class="mcl">Network Architecture</div></div></div></div>
   <div><img class="prx" data-prx="0.10" src="assets/images/photo-1518770660439-4636190af475-w900.jpg" style="width:100%;border-radius:20px;box-shadow:var(--shx);object-fit:cover;height:360px" alt="Networking hardware and connectivity" loading="eager" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#E7E9F6,#F1ECFB)';this.parentNode.style.minHeight='360px';this.parentNode.style.borderRadius='20px'"></div>
 </div></div></div>
@@ -192,10 +192,96 @@
   </div>
 </div></section>
 <section class="S"><div class="W">
-  <div class="sec-flex"><div><div class="eyebrow rv">Reference stack</div><h2 class="h1 rv d1">Recommended <span class="hl">tools &amp; vendors</span></h2></div><p class="sub rv d2">Vendor-neutral by default — final selection is based on your existing environment, team expertise, budget and long-term roadmap alignment.</p></div>
-  <div class="tag-cloud rv" style="margin-top:6px"><span class="tag">Cisco</span><span class="tag">Fortinet</span><span class="tag">Palo Alto</span><span class="tag">Ubiquiti</span><span class="tag">Aruba</span><span class="tag">SolarWinds</span></div>
+  <div class="ref-split">
+    <div class="ref-copy">
+      <div class="eyebrow rv">Reference stack</div>
+      <h2 class="h1 rv d1">Recommended <span class="hl">tools &amp; vendors</span></h2>
+      <p class="sub rv d2" style="margin-top:18px">Vendor-neutral by default — final selection is based on your existing environment, team expertise, budget and long-term roadmap alignment.</p>
+      <div class="tag-cloud rv d3" style="margin-top:26px"><span class="tag">Cisco</span><span class="tag">Fortinet</span><span class="tag">Palo Alto</span><span class="tag">Ubiquiti</span><span class="tag">Aruba</span><span class="tag">SolarWinds</span></div>
+    </div>
+    <div class="netmap rv d2" aria-hidden="true">
+      <span class="netmap-tag">Reference architecture</span>
+      <svg class="netmap-svg" viewBox="0 0 460 478" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="nmFlow" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#4f46e5"/><stop offset=".55" stop-color="#7c5cff"/><stop offset="1" stop-color="#c84be0"/>
+          </linearGradient>
+          <radialGradient id="nmGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0" stop-color="#7c5cff" stop-opacity=".40"/><stop offset="1" stop-color="#7c5cff" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+
+        <circle class="nm-coreglow" cx="210" cy="278" r="98" fill="url(#nmGlow)"/>
+
+        <!-- base links + client stems -->
+        <g class="nm-links">
+          <path id="nmlk1" d="M210 70 V146"/>
+          <path id="nmlk2" d="M210 202 V250"/>
+          <path id="nmlk3" d="M210 306 C210 350 95 344 95 386"/>
+          <path id="nmlk4" d="M210 306 C210 350 325 344 325 386"/>
+          <path class="nm-stem" d="M95 442 L66 460 M95 442 V460 M95 442 L124 460 M325 442 L296 460 M325 442 V460 M325 442 L354 460"/>
+        </g>
+        <path class="nm-mon-link" d="M286 278 C336 278 380 232 380 140"/>
+
+        <!-- animated data flow overlay -->
+        <g class="nm-flow">
+          <use href="#nmlk1"/><use href="#nmlk2"/><use href="#nmlk3"/><use href="#nmlk4"/>
+        </g>
+
+        <!-- client devices -->
+        <g class="nm-ends">
+          <circle cx="66" cy="464" r="4"/><circle cx="95" cy="464" r="4"/><circle cx="124" cy="464" r="4"/>
+          <circle cx="296" cy="464" r="4"/><circle cx="325" cy="464" r="4"/><circle cx="354" cy="464" r="4"/>
+        </g>
+
+        <!-- traveling pulses -->
+        <circle class="nm-pulse" r="3.6"><animateMotion dur="2.4s" repeatCount="indefinite" calcMode="linear"><mpath href="#nmlk1"/></animateMotion></circle>
+        <circle class="nm-pulse" r="3.6"><animateMotion dur="2.4s" begin="0.7s" repeatCount="indefinite" calcMode="linear"><mpath href="#nmlk2"/></animateMotion></circle>
+        <circle class="nm-pulse" r="3.6"><animateMotion dur="2.7s" begin="1.3s" repeatCount="indefinite" calcMode="linear"><mpath href="#nmlk3"/></animateMotion></circle>
+        <circle class="nm-pulse" r="3.6"><animateMotion dur="2.7s" begin="1.8s" repeatCount="indefinite" calcMode="linear"><mpath href="#nmlk4"/></animateMotion></circle>
+
+        <!-- nodes -->
+        <g class="nm-node">
+          <rect x="112" y="14" width="196" height="56" rx="15"/>
+          <g class="nm-ic" transform="translate(128,30)"><path d="M6 16.5h10.5a3.8 3.8 0 0 0 .5-7.6 5.3 5.3 0 0 0-10.2-1.3A4 4 0 0 0 6 16.5Z"/></g>
+          <text class="nm-t" x="170" y="39">Internet</text><text class="nm-s" x="170" y="55">WAN edge · dual ISP</text>
+          <circle class="nm-led" cx="290" cy="30" r="3"/>
+        </g>
+        <g class="nm-node">
+          <rect x="112" y="146" width="196" height="56" rx="15"/>
+          <g class="nm-ic" transform="translate(128,162)"><path d="M12 3l7 2.5v5.2c0 4.2-3 7.2-7 8.3-4-1.1-7-4.1-7-8.3V5.5L12 3Z"/><path d="M9 11.6l2 2 4-4.2"/></g>
+          <text class="nm-t" x="170" y="171">Firewall</text><text class="nm-s" x="170" y="187">Fortinet · Palo Alto</text>
+          <circle class="nm-led" cx="290" cy="162" r="3"/>
+        </g>
+        <g class="nm-node nm-node-core">
+          <rect x="112" y="250" width="196" height="56" rx="15"/>
+          <g class="nm-ic" transform="translate(128,266)"><rect x="2.5" y="8" width="19" height="8" rx="1.6"/><path d="M7 16v2.4M12 16v2.4M17 16v2.4"/><circle cx="6.5" cy="12" r="1" class="nm-fill"/><circle cx="10.5" cy="12" r="1" class="nm-fill"/></g>
+          <text class="nm-t" x="170" y="275">Core Switch</text><text class="nm-s" x="170" y="291">Cisco Catalyst</text>
+          <circle class="nm-led" cx="290" cy="266" r="3"/>
+        </g>
+        <g class="nm-node">
+          <rect x="20" y="386" width="150" height="56" rx="14"/>
+          <g class="nm-ic" transform="translate(36,402)"><path d="M4 9.5a12 12 0 0 1 16 0M7 12.7a7.5 7.5 0 0 1 10 0M10 15.9a3 3 0 0 1 4 0"/><circle cx="12" cy="18.6" r="1.1" class="nm-fill"/></g>
+          <text class="nm-t" x="72" y="411">Wi-Fi</text><text class="nm-s" x="72" y="427">Aruba</text>
+          <circle class="nm-led" cx="152" cy="402" r="3"/>
+        </g>
+        <g class="nm-node">
+          <rect x="250" y="386" width="150" height="56" rx="14"/>
+          <g class="nm-ic" transform="translate(266,402)"><rect x="2.5" y="8" width="19" height="8" rx="1.6"/><path d="M6 10.5v3M10 10.5v3M14 10.5v3M18 10.5v3"/></g>
+          <text class="nm-t" x="302" y="411">Access</text><text class="nm-s" x="302" y="427">Ubiquiti</text>
+          <circle class="nm-led" cx="382" cy="402" r="3"/>
+        </g>
+        <g class="nm-node nm-node-mon">
+          <rect x="316" y="94" width="128" height="46" rx="13"/>
+          <g class="nm-ic" transform="translate(330,105)"><rect x="3" y="4" width="18" height="12.5" rx="1.6"/><path d="M7.5 13v-3M12 13v-5.5M16.5 13v-2.2M9 19.5h6M12 16.5v3"/></g>
+          <text class="nm-t sm" x="364" y="113">Monitor</text><text class="nm-s" x="364" y="127">SolarWinds</text>
+          <circle class="nm-led" cx="430" cy="106" r="3"/>
+        </g>
+      </svg>
+    </div>
+  </div>
 </div></section>
-<section class="S"><div class="W"><div class="ctab rv"><div class="ctab-fx" aria-hidden="true"><span class="cfx cfx-ring-lg"></span><span class="cfx cfx-ring-md"></span><span class="cfx cfx-square"></span><span class="cfx cfx-dot"></span><span class="cfx cfx-line"></span></div><div class="cbl"><h3>Ready to build a network you can trust?</h3><p>From ISP edge to access layer — resilient, segmented and monitored, scalable from 50 to 500+ users.</p></div><a class="bw" href="contact.html">Talk to an Expert <span class="arr">→</span></a></div></div></section>
+<section class="S"><div class="W"><div class="ctab rv"><div class="ctab-fx" aria-hidden="true"><span class="cfx cfx-ring-lg"></span><span class="cfx cfx-ring-md"></span><span class="cfx cfx-square"></span><span class="cfx cfx-dot"></span><span class="cfx cfx-line"></span></div><div class="cbl"><h3>Ready to build a network you can trust?</h3><p>From ISP edge to access layer — resilient, segmented and monitored, scalable from 50 to 500+ users.</p></div><a class="bw" href="contact.html">Talk to Us <span class="arr">→</span></a></div></div></section>
 </div>
 
 <!-- SIGNAL FOOTER (indigo-ink) -->

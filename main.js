@@ -237,7 +237,9 @@ if (document.readyState === 'loading') {
   if(!stage||!track)return;
   var maxX=0,dist=0;
   function navH(){return parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--navH'))||70;}
-  function isMobile(){return window.innerWidth<=820;}
+  /* Industries rail uses the static, no-pin horizontal-scroll layout on every
+     width — the pinned-scroll variant left a tall empty runway under the cards. */
+  function isMobile(){return true;}
   function measure(){
     if(isMobile()){stage.classList.add('no-pin');stage.style.height='';track.style.transform='';for(var m=0;m<track.children.length;m++){track.children[m].style.opacity='';var mi=track.children[m].querySelector('.indx-img');if(mi)mi.style.transform='';}return;}
     stage.classList.remove('no-pin');

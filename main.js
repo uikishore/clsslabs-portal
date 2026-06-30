@@ -244,7 +244,7 @@ if (document.readyState === 'loading') {
     var pinH=window.innerHeight-navH();
     var vw=track.parentElement.clientWidth;
     maxX=Math.max(0,track.scrollWidth-vw);
-    dist=maxX;
+    dist=Math.min(maxX,Math.round(window.innerHeight*1.6));
     stage.style.height=(pinH+dist)+'px';
   }
   function frame(){

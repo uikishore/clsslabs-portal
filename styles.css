@@ -4166,7 +4166,9 @@ html.js .sap-stack.stackable .sap-panel {
 .indp {
   flex: 0 0 auto;
   width: clamp(280px, 30vw, 400px);
-  height: clamp(360px, 58vh, 560px);
+  /* fill the pinned viewport height so tall screens don't leave an empty
+     band under the cards (heading + gaps + hint + padding ≈ 210px overhead) */
+  height: max(360px, calc(100vh - var(--navH, 70px) - 210px));
   min-height: 0;
   will-change: opacity, transform;
 }

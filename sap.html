@@ -216,48 +216,65 @@
 })();
 </script>
 <!-- ════ SAP AUTHORIZED PARTNER ════ -->
+<style>
+.saz-wrap{margin-top:40px;display:flex;flex-direction:column;gap:18px}
+.saz{display:grid;grid-template-columns:270px 1fr;gap:30px;align-items:center;position:relative;background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:26px 30px;box-shadow:0 16px 40px -24px rgba(21,23,58,.18);overflow:hidden}
+.saz::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(160deg,var(--azc),var(--azc2))}
+.saz-no{font:800 40px/1 var(--serif);background:linear-gradient(150deg,var(--azc),var(--azc2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.saz-head{display:flex;align-items:center;gap:11px;margin:12px 0 9px}
+.saz-badge{display:inline-grid;place-items:center;width:46px;height:29px;border-radius:7px;font:800 12px var(--sans);letter-spacing:.4px;flex:0 0 auto}
+.saz-az{font:600 10px var(--mono);letter-spacing:1.6px;text-transform:uppercase;color:var(--dim)}
+.saz-name{font-family:var(--serif);font-weight:700;font-size:21px;color:var(--ink);line-height:1.1}
+.saz-desc{font-size:13px;color:var(--mid);line-height:1.6}
+.saz-items{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.saz-card{display:flex;gap:12px;align-items:flex-start;padding:14px 15px;border:1px solid var(--line);border-radius:13px;background:var(--porcelain);transition:transform .2s var(--ez),box-shadow .2s var(--ez),border-color .2s var(--ez)}
+.saz-card:hover{transform:translateY(-3px);border-color:var(--line2);box-shadow:0 14px 30px -16px rgba(21,23,58,.22)}
+.saz-cic{flex:0 0 auto;width:34px;height:34px;border-radius:9px;display:grid;place-items:center;font-size:16px;background:var(--irisT)}
+.saz-ct{font:600 14px var(--serif);color:var(--ink);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.saz-cs{display:block;font-size:12px;color:var(--mid);line-height:1.5;margin-top:3px}
+.saz-chip{font:700 9px var(--mono);letter-spacing:.8px;text-transform:uppercase;padding:3px 9px;border-radius:20px}
+.saz-conv{display:flex;align-items:center;gap:16px;padding:20px 26px;border-radius:18px;background:linear-gradient(120deg,#4f46e5,#7c5cff 46%,#c84be0);box-shadow:0 22px 48px -22px rgba(124,92,255,.5)}
+.saz-conv-ic{flex:0 0 auto;width:46px;height:46px;border-radius:13px;display:grid;place-items:center;font-size:22px;background:rgba(255,255,255,.16)}
+.saz-conv b{font-family:var(--serif);font-size:16px;font-weight:700;color:#fff}
+.saz-conv span{color:rgba(255,255,255,.86);font-size:13.5px}
+@media(max-width:860px){.saz{grid-template-columns:1fr;gap:18px;padding:22px}.saz-items{grid-template-columns:1fr}}
+</style>
 <section class="S Salf"><div class="W">
   <div class="sec-flex">
     <div><div class="eyebrow rv">SAP Partnership</div><h2 class="h1 rv d1">SAP <span class="hl">Authorized Partner</span></h2></div>
     <p class="sub rv d2">CLSS Labs holds SAP Authorization across two strategic pillars — delivering SAP Services and reselling SAP Cloud licenses as a trusted SAP partner in India.</p>
   </div>
-  <div class="tcol" style="margin-top:42px;align-items:start;gap:24px">
+  <div class="saz-wrap">
 
-    <div class="fcard rv" style="padding:0;overflow:hidden">
-      <div style="display:flex;align-items:center;gap:14px;padding:20px 24px;background:linear-gradient(120deg,#1b4ee8,#4f46e5)">
-        <span style="display:inline-grid;place-items:center;width:48px;height:30px;border-radius:7px;background:#fff;color:#1b4ee8;font:800 13px var(--sans);letter-spacing:.4px">SAP</span>
-        <div><div style="font:600 10px/1 var(--mono);letter-spacing:1.6px;text-transform:uppercase;color:rgba(255,255,255,.78)">Authorization 1</div><div style="font-family:var(--serif);font-weight:700;font-size:20px;color:#fff;margin-top:4px">SAP Services</div></div>
+    <div class="saz rv" style="--azc:#1b4ee8;--azc2:#4f46e5">
+      <div>
+        <span class="saz-no">01</span>
+        <div class="saz-head"><span class="saz-badge" style="background:#1b4ee8;color:#fff">SAP</span><div><div class="saz-az">Authorization 1</div><div class="saz-name">SAP Services</div></div></div>
+        <p class="saz-desc">Authorized to deliver the full SAP services lifecycle — strategy, implementation and long-term managed support.</p>
       </div>
-      <div style="padding:22px 24px 24px">
-        <p style="font-size:13.5px;color:var(--mid);line-height:1.6;margin-bottom:18px">Authorized to deliver the full SAP services lifecycle — from strategy and implementation through to long-term managed support.</p>
-        <div style="display:flex;flex-direction:column;gap:10px">
-          <div class="irow"><div class="irico">🚀</div><div><div class="irtl">SAP Implementation</div><div class="irds">End-to-end SAP ERP deployment — ECC, S/4HANA, industry-specific</div></div></div>
-          <div class="irow"><div class="irico">🔄</div><div><div class="irtl">Migration &amp; System Conversion</div><div class="irds">ECC → S/4HANA brownfield conversion and system consolidation</div></div></div>
-          <div class="irow"><div class="irico">⬆️</div><div><div class="irtl">Upgrades</div><div class="irds">SAP version upgrades with zero-downtime planning and execution</div></div></div>
-          <div class="irow"><div class="irico">🛠️</div><div><div class="irtl">SAP AMS</div><div class="irds">24/7 Application Management Services — incident, change &amp; optimization</div></div></div>
-        </div>
+      <div class="saz-items">
+        <div class="saz-card"><span class="saz-cic">🚀</span><div><span class="saz-ct">SAP Implementation</span><span class="saz-cs">End-to-end SAP ERP deployment — ECC, S/4HANA, industry-specific</span></div></div>
+        <div class="saz-card"><span class="saz-cic">🔄</span><div><span class="saz-ct">Migration &amp; Conversion</span><span class="saz-cs">ECC → S/4HANA brownfield conversion &amp; system consolidation</span></div></div>
+        <div class="saz-card"><span class="saz-cic">⬆️</span><div><span class="saz-ct">Upgrades</span><span class="saz-cs">SAP version upgrades with zero-downtime planning &amp; execution</span></div></div>
+        <div class="saz-card"><span class="saz-cic">🛠️</span><div><span class="saz-ct">SAP AMS</span><span class="saz-cs">24/7 Application Management — incident, change &amp; optimization</span></div></div>
       </div>
     </div>
 
-    <div class="fcard rv d1" style="padding:0;overflow:hidden">
-      <div style="display:flex;align-items:center;gap:14px;padding:20px 24px;background:linear-gradient(120deg,#15173a,#2b1f60)">
-        <span style="display:inline-grid;place-items:center;width:48px;height:30px;border-radius:7px;background:#f0ab00;color:#15173a;font:800 13px var(--sans);letter-spacing:.4px">SAP</span>
-        <div><div style="font:600 10px/1 var(--mono);letter-spacing:1.6px;text-transform:uppercase;color:#f7c25a">Authorization 2</div><div style="font-family:var(--serif);font-weight:700;font-size:20px;color:#fff;margin-top:4px">SAP Sell</div></div>
+    <div class="saz rv d1" style="--azc:#1b1640;--azc2:#7c5cff">
+      <div>
+        <span class="saz-no">02</span>
+        <div class="saz-head"><span class="saz-badge" style="background:#f0ab00;color:#15173a">SAP</span><div><div class="saz-az">Authorization 2</div><div class="saz-name">SAP Sell</div></div></div>
+        <p class="saz-desc">Authorized to resell SAP Public &amp; Private Cloud licenses — the right cloud edition at the right commercial terms.</p>
       </div>
-      <div style="padding:22px 24px 24px">
-        <p style="font-size:13.5px;color:var(--mid);line-height:1.6;margin-bottom:18px">Authorized to resell SAP Public and Private Cloud licenses — helping clients access the right cloud edition at the right commercial terms.</p>
-        <div style="display:flex;flex-direction:column;gap:12px">
-          <div style="border:1px solid var(--line);border-radius:14px;padding:15px 17px">
-            <div style="display:flex;align-items:center;gap:9px;margin-bottom:6px;flex-wrap:wrap"><span class="bdg bgr">Public Cloud</span><span style="font-family:var(--serif);font-weight:700;font-size:15px;color:var(--ink)">SAP S/4HANA Grow</span><span style="margin-left:auto;font-size:16px">☁️</span></div>
-            <div class="irds">Standardized cloud ERP for mid-market enterprises — rapid deployment, subscription-based, always current</div>
-          </div>
-          <div style="border:1px solid var(--line);border-radius:14px;padding:15px 17px">
-            <div style="display:flex;align-items:center;gap:9px;margin-bottom:6px;flex-wrap:wrap"><span class="bdg" style="background:var(--irisT);color:var(--iris2)">Private Cloud</span><span style="font-family:var(--serif);font-weight:700;font-size:15px;color:var(--ink)">Rise with SAP</span><span style="margin-left:auto;font-size:16px">🧱</span></div>
-            <div class="irds">End-to-end SAP S/4HANA cloud transformation bundle — managed infrastructure, services &amp; continuous innovation</div>
-          </div>
-          <div style="background:var(--irisT);border:1px solid #e0daf8;border-radius:12px;padding:13px 16px;font-size:13px;line-height:1.55"><b style="color:var(--ink)">One partner for SAP licenses AND services.</b> <span style="color:var(--mid)">Faster commercials, unified accountability, no coordination gap.</span></div>
-        </div>
+      <div class="saz-items">
+        <div class="saz-card"><span class="saz-cic" style="background:#d9f6ec">☁️</span><div><span class="saz-ct">SAP S/4HANA Grow <span class="saz-chip" style="background:#d9f6ec;color:#0b7a55">Public Cloud</span></span><span class="saz-cs">Standardized cloud ERP for mid-market — rapid deployment, subscription-based, always current</span></div></div>
+        <div class="saz-card"><span class="saz-cic">🧱</span><div><span class="saz-ct">Rise with SAP <span class="saz-chip" style="background:var(--irisT);color:var(--iris2)">Private Cloud</span></span><span class="saz-cs">End-to-end S/4HANA cloud transformation — managed infrastructure, services &amp; continuous innovation</span></div></div>
       </div>
+    </div>
+
+    <div class="saz-conv rv d2">
+      <span class="saz-conv-ic">🤝</span>
+      <div><b>One partner for SAP licenses AND services.</b> <span>Faster commercials, unified accountability, no coordination gap.</span></div>
     </div>
 
   </div>

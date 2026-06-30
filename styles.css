@@ -67,7 +67,10 @@ body {
   background: var(--porcelain);
   color: var(--ink);
   line-height: 1.6;
-  overflow-x: hidden;
+  /* clip (not hidden) stops sideways overflow WITHOUT making body a scroll
+     container — overflow-x:hidden here breaks every position:sticky inside it
+     (e.g. the Industries pinned-parallax rail). */
+  overflow-x: clip;
 }
 ::selection {
   background: var(--ink);

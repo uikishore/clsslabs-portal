@@ -6779,7 +6779,10 @@ html.js .er-float.rv.on {
   max-width: 462px;
   margin: 0 auto;
   padding: 18px 18px 14px;
-  background: var(--paper);
+  /* soft focal glow behind the core node (top-centre) for airy depth */
+  background:
+    radial-gradient(120% 78% at 50% 15%, rgba(124, 92, 255, 0.09), rgba(79, 70, 229, 0.02) 42%, transparent 70%),
+    var(--paper);
   border: 1px solid var(--line);
   border-radius: 24px;
   box-shadow: 0 34px 80px -24px rgba(21, 23, 58, 0.30), 0 10px 28px -10px rgba(21, 23, 58, 0.12);
@@ -6823,20 +6826,20 @@ html.js .er-float.rv.on {
 .netmap-svg { position: relative; z-index: 1; display: block; width: 100%; height: auto; overflow: visible; }
 
 /* links */
-.nm-links path { stroke: var(--line2); stroke-width: 2; fill: none; }
+.nm-links path { stroke: url(#nmFlow); stroke-width: 2; fill: none; opacity: 0.5; stroke-linecap: round; }
 .nm-links .nm-stem { stroke-width: 1.4; }
-.nm-mon-link { stroke: var(--line2); stroke-width: 1.5; stroke-dasharray: 2 5; fill: none; animation: nmDash 7s linear infinite; }
+.nm-mon-link { stroke: url(#nmFlow); opacity: 0.4; stroke-width: 1.5; stroke-dasharray: 2 5; fill: none; animation: nmDash 7s linear infinite; }
 .nm-flow use { stroke: url(#nmFlow); stroke-width: 2.4; fill: none; stroke-linecap: round; stroke-dasharray: 9 13; animation: nmFlowMove 1s linear infinite; }
 @keyframes nmFlowMove { to { stroke-dashoffset: -22; } }
 @keyframes nmDash { to { stroke-dashoffset: -28; } }
 
 /* client devices + traveling pulses */
-.nm-ends circle { fill: var(--mist); stroke: var(--line2); stroke-width: 1.4; }
+.nm-ends circle { fill: var(--paper); stroke: var(--violet); stroke-width: 1.3; opacity: 0.6; }
 .nm-pulse { fill: #fff; stroke: var(--violet); stroke-width: 2; filter: drop-shadow(0 0 4px rgba(124, 92, 255, 0.85)); }
 
 /* nodes */
 .nm-node rect { fill: var(--paper); stroke: var(--line); stroke-width: 1.2; filter: drop-shadow(0 9px 16px rgba(21, 23, 58, 0.10)); }
-.nm-node-core rect { stroke: url(#nmFlow); stroke-width: 1.8; filter: drop-shadow(0 12px 24px rgba(124, 92, 255, 0.28)); }
+.nm-node-core rect { stroke: url(#nmFlow); stroke-width: 2; filter: drop-shadow(0 16px 34px rgba(124, 92, 255, 0.36)); }
 .nm-ic path, .nm-ic rect { stroke: var(--iris); stroke-width: 1.7; fill: none; stroke-linecap: round; stroke-linejoin: round; }
 .nm-ic .nm-fill { fill: var(--iris); stroke: none; }
 .nm-node-core .nm-ic path, .nm-node-core .nm-ic rect { stroke: var(--violet); }

@@ -3490,14 +3490,17 @@ html.js .sap-stack.stackable .sap-panel {
     rgba(21, 23, 58, 0) 55%
   );
 }
-/* Full-figure variant: for infographics / timelines that must be shown
-   whole — natural aspect, no cropping and no dark overlay. */
+/* Full-figure variant: for infographics / timelines. No dark overlay.
+   The source PNG (1560x831) has an empty decorative band above the
+   title, so we trim ~13% off the top by cropping to a shorter display
+   ratio anchored to the bottom — every milestone label stays intact. */
 .ab-herofig.ab-figfull {
-  aspect-ratio: auto;
+  aspect-ratio: 1560 / 723;
 }
 .ab-herofig.ab-figfull img {
-  height: auto;
-  object-fit: contain;
+  height: 100%;
+  object-fit: cover;
+  object-position: center bottom;
 }
 .ab-herofig.ab-figfull::after {
   display: none;

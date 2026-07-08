@@ -175,25 +175,24 @@
 
 <!-- ════════════════ OUR JOURNEY ════════════════ -->
 <style>
-.jr-head{max-width:660px;margin:0 auto 52px;text-align:center}
+.jr-head{max-width:660px;margin:0 auto 48px;text-align:center}
 .jr-head .jr-sub{color:var(--mid);font-size:15px;line-height:1.65;margin-top:14px}
-.jr{position:relative;max-width:940px;margin:0 auto;padding:6px 0}
-.jr::before{content:"";position:absolute;top:0;bottom:0;left:50%;transform:translateX(-50%);width:2px;border-radius:2px;background:linear-gradient(180deg,transparent,#4f46e5 5%,#7c5cff 50%,#c84be0 95%,transparent)}
-.jr-it{position:relative;width:50%;padding:12px 42px 12px 0;box-sizing:border-box;text-align:right}
-.jr-it:nth-child(even){margin-left:50%;padding:12px 0 12px 42px;text-align:left}
-.jr-node{position:absolute;top:18px;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;font-size:20px;background:var(--spec);box-shadow:0 10px 24px -6px rgba(124,92,255,.55),0 0 0 5px var(--paper);z-index:2}
-.jr-it:nth-child(odd) .jr-node{right:-23px}
-.jr-it:nth-child(even) .jr-node{left:-23px}
-.jr-card{display:inline-block;text-align:left;max-width:100%;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:16px 20px;box-shadow:0 14px 34px -22px rgba(21,23,58,.2);transition:transform .28s var(--ez),box-shadow .28s var(--ez),border-color .28s var(--ez)}
-.jr-card:hover{transform:translateY(-5px);box-shadow:0 26px 50px -22px rgba(124,92,255,.32);border-color:#d9d5fb}
-.jr-yr{display:inline-block;font-family:var(--serif);font-weight:800;font-size:21px;letter-spacing:-.5px;background:var(--spec);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;line-height:1}
-.jr-card h3{font-family:var(--serif);font-weight:700;font-size:16px;color:var(--ink);margin:6px 0 6px}
+/* Vertical single-column timeline. Line + nodes use positive offsets
+   fully inside the container so the icon circles are never clipped. */
+.jr{position:relative;max-width:720px;margin:0 auto;padding:2px 0 0}
+.jr::before{content:"";position:absolute;top:12px;bottom:16px;left:27px;width:2px;border-radius:2px;background:linear-gradient(180deg,transparent,#4f46e5 3%,#7c5cff 50%,#c84be0 97%,transparent)}
+.jr-it{position:relative;padding:0 0 24px 82px;text-align:left}
+.jr-it:last-child{padding-bottom:2px}
+.jr-node{position:absolute;left:4px;top:1px;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;font-size:20px;line-height:1;background:var(--spec);box-shadow:0 10px 22px -6px rgba(124,92,255,.5),0 0 0 5px var(--paper);z-index:2}
+.jr-card{display:block;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:15px 20px;box-shadow:0 14px 34px -22px rgba(21,23,58,.2);transition:transform .28s var(--ez),box-shadow .28s var(--ez),border-color .28s var(--ez)}
+.jr-card:hover{transform:translateY(-4px);box-shadow:0 24px 48px -22px rgba(124,92,255,.3);border-color:#d9d5fb}
+.jr-yr{display:inline-block;font-family:var(--serif);font-weight:800;font-size:20px;letter-spacing:-.5px;background:var(--spec);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;line-height:1}
+.jr-card h3{font-family:var(--serif);font-weight:700;font-size:16px;color:var(--ink);margin:5px 0 6px}
 .jr-card p{font-size:13px;color:var(--mid);line-height:1.55;margin:0}
-@media(max-width:760px){
-  .jr{max-width:520px}
-  .jr::before{left:22px}
-  .jr-it,.jr-it:nth-child(even){width:100%;margin-left:0;padding:11px 0 11px 58px;text-align:left}
-  .jr-it:nth-child(odd) .jr-node,.jr-it:nth-child(even) .jr-node{left:-1px;right:auto}
+@media(max-width:520px){
+  .jr-it{padding:0 0 20px 68px}
+  .jr::before{left:23px}
+  .jr-node{width:42px;height:42px;font-size:18px;left:2px}
 }
 </style>
 <section class="S" id="our-journey"><div class="W">

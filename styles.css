@@ -1355,23 +1355,6 @@ html.js .htit.on .ln > span {
   object-fit: cover;
   display: block;
 }
-/* Desktop: stretch the hero image to the text column's height so its
-   top and bottom line up with the copy on the left (and it reads bigger). */
-@media (min-width: 1081px) {
-  .hero-in {
-    align-items: stretch;
-  }
-  .hvis {
-    height: 100%;
-  }
-  .hglass {
-    height: 100%;
-  }
-  .hglass > img {
-    height: 100%;
-    min-height: 480px;
-  }
-}
 .hglass .scan {
   position: absolute;
   inset: 0;

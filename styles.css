@@ -3490,6 +3490,18 @@ html.js .sap-stack.stackable .sap-panel {
     rgba(21, 23, 58, 0) 55%
   );
 }
+/* Full-figure variant: for infographics / timelines that must be shown
+   whole — natural aspect, no cropping and no dark overlay. */
+.ab-herofig.ab-figfull {
+  aspect-ratio: auto;
+}
+.ab-herofig.ab-figfull img {
+  height: auto;
+  object-fit: contain;
+}
+.ab-herofig.ab-figfull::after {
+  display: none;
+}
 .ab-stats {
   display: grid;
   grid-template-columns: repeat(4, 1fr);

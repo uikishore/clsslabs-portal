@@ -1164,7 +1164,7 @@ html.js .rv.on {
   position: relative;
   z-index: 2;
   display: grid;
-  grid-template-columns: 1.04fr 0.96fr;
+  grid-template-columns: 1fr 1.06fr;
   gap: 56px;
   align-items: center;
   width: 100%;
@@ -1351,7 +1351,7 @@ html.js .htit.on .ln > span {
 }
 .hglass > img {
   width: 100%;
-  height: 420px;
+  height: 480px;
   object-fit: cover;
   display: block;
 }
